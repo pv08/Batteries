@@ -21,28 +21,28 @@ battery_size = 10    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base bat
 
 # ...::: IMPORTING DATA :::...
 # HIGH VOLTAGE BUSES DATA
-hvbus_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\BusListHV.csv",delimiter=',')
+hvbus_data = pd.read_csv(r"data/dss_data\BusListHV.csv",delimiter=',')
 hvbus_names = hvbus_data['NAME']
 hvbus_basekv = hvbus_data['BASE_KV']
 hvbus_latitude = hvbus_data['LATITUDE']
 hvbus_longitude = hvbus_data['LONGITUDE']
 hvbus_geodata = list(zip(hvbus_latitude, hvbus_longitude))
 # MEDIUM VOLTAGE BUSES DATA
-mvbus_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\BusListMV.csv",delimiter=',')
+mvbus_data = pd.read_csv(r"data/dss_data\BusListMV.csv",delimiter=',')
 mvbus_names = mvbus_data['NAME']
 mvbus_basekv = mvbus_data['BASE_KV']
 mvbus_latitude = mvbus_data['LATITUDE']
 mvbus_longitude = mvbus_data['LONGITUDE']
 mvbus_geodata = list(zip(mvbus_latitude, mvbus_longitude))
 # LOW VOLTAGE BUSES DATA
-lvbus_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\BusListLV.csv",delimiter=',')
+lvbus_data = pd.read_csv(r"data/dss_data\BusListLV.csv",delimiter=',')
 lvbus_names = lvbus_data['NAME']
 lvbus_basekv = lvbus_data['BASE_KV']
 lvbus_latitude = lvbus_data['LATITUDE']
 lvbus_longitude = lvbus_data['LONGITUDE']
 lvbus_geodata = list(zip(lvbus_latitude, lvbus_longitude))
 # MEDIUM VOLTAGE LINES DATA
-mvline_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\LinesListMV.csv",delimiter=',')
+mvline_data = pd.read_csv(r"data/dss_data\LinesListMV.csv",delimiter=',')
 mvline_names = mvline_data['NAME']
 mvline_from = mvline_data['BUS_FROM']
 mvline_to = mvline_data['BUS_TO']
@@ -50,7 +50,7 @@ mvline_length = mvline_data['LENGTH[M]']
 mvline_geometry = mvline_data['GEOMETRY']
 mvline_basekv = mvline_data['BASE_KV']
 # LOW VOLTAGE LINES DATA
-lvline_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\LinesListLV.csv",delimiter=',')
+lvline_data = pd.read_csv(r"data/dss_data\LinesListLV.csv",delimiter=',')
 lvline_names = lvline_data['NAME']
 lvline_from = lvline_data['BUS_FROM']
 lvline_to = lvline_data['BUS_TO']
@@ -58,7 +58,7 @@ lvline_length = lvline_data['LENGTH[M]']
 lvline_geometry = lvline_data['GEOMETRY']
 lvline_basekv = lvline_data['BASE_KV']
 # SUBSTATIONS DATA - THREE WINDING TRANSFORMER
-trafo3w_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\SubstationList.csv", delimiter=',')
+trafo3w_data = pd.read_csv(r"data/dss_data\SubstationList.csv", delimiter=',')
 trafo3w_names = trafo3w_data['NAME']
 trafo3w_hvbus = trafo3w_data['HV_BUS']
 trafo3w_mvbus = trafo3w_data['MV_BUS']
@@ -78,7 +78,7 @@ trafo3w_lvvscr = trafo3w_data['VKR_LV_PERCENT']
 trafo3w_pfe = trafo3w_data['PFE_KW']
 trafo3w_i0 = trafo3w_data['I0_PERCENT']
 # TRANSFORMERS DATA
-trafo_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\TransformersList.csv", delimiter=',')
+trafo_data = pd.read_csv(r"data/dss_data\TransformersList.csv", delimiter=',')
 trafo_names = trafo_data['NAME']
 trafo_hvbus = trafo_data['HV_BUS']
 trafo_lvbus = trafo_data['LV_BUS']
@@ -90,7 +90,7 @@ trafo_vsc = trafo_data['VK_PERCENT']
 trafo_pfe = trafo_data['PFE_KW']
 trafo_i0 = trafo_data['I0_PERCENT']
 # LOADS DATA
-load_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\LoadsList_Caso0%s.csv" % case,delimiter=',')
+load_data = pd.read_csv(r"data/dss_data\LoadsList_Caso0%s.csv" % case,delimiter=',')
 load_name = load_data['NAME']
 load_bus = load_data['BUS']
 load_basekv = load_data['BASE_KV']
@@ -101,7 +101,7 @@ load_loadshape = load_data['LOADSHAPE']
 load_kwh = load_data['KWH']
 load_community = load_data['COMMUNITY']
 # GENERATORS DATA
-gen_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\PvList_Caso0%s.csv" % case,delimiter=',')
+gen_data = pd.read_csv(r"data/dss_data\PvList_Caso0%s.csv" % case,delimiter=',')
 gen_name = gen_data['NAME']
 gen_bus = gen_data['BUS']
 gen_basekv = gen_data['BASE_KV']
@@ -112,7 +112,7 @@ gen_basekw = gen_data['BASE_KW']
 gen_genshape = gen_data['GEN_SHAPE']
 gen_community = gen_data['COMMUNITY']
 # STORAGE DATA - COMMUNITY BATTERIES
-bat_data = pd.read_csv(r"C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\BatteryList_Caso0%s.csv" % case,delimiter=',')
+bat_data = pd.read_csv(r"data/dss_data\BatteryList_Caso0%s.csv" % case,delimiter=',')
 bat_name = bat_data['NAME']
 bat_bus = bat_data['BUS']
 bat_community = bat_data['COMMUNITY']
@@ -177,7 +177,7 @@ def agents_info():
 
     agent_data = {'AGENT': agent_number, 'NAME': agent_name, 'TYPE': agent_type, 'BUS': agent_bus,
                   'BASE_KW': agent_basekw,
-                  'COMMUNITY_LOCATION': community_location, 'PROFILE': agent_profile}
+                  'COMMUNIT': community_location, 'PROFILE': agent_profile}
     agent_df = pd.DataFrame(data=agent_data, index=None)
     return agent_df
 
@@ -298,7 +298,7 @@ def pandapower_plot():
                        load_collection, gen_collection, prosumer_collection, bat_collection]
 
     pp.plotting.draw_collections(collections=collections)
-    # plt.savefig(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\DSS\plot_data\teste.svg')
+    # plt.savefig(r'data/dss_data\teste.svg')
     # plt.show()
 
     # Plotting Network
@@ -693,13 +693,13 @@ for i in range(0,n_agents-2):
 num_community_buses = len(community_buses)
 # num_all_lines = len(lvline_data) + len(mvline_data)
 num_community_lines =  len(community_lines)
-
+# **************************************************************************
 # LOADING RESULTS DICTIONARIES
-optimization_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_optimization_results.npy',allow_pickle='TRUE').item()
-agents_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_agents_results.npy',allow_pickle='TRUE').item()
-communities_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_communities_results.npy',allow_pickle='TRUE').item()
-community_bus_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_bus_results.npy',allow_pickle='TRUE').item()
-community_lines_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_lines_results.npy',allow_pickle='TRUE').item()
+# optimization_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_optimization_results.npy',allow_pickle='TRUE').item()
+# agents_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_agents_results.npy',allow_pickle='TRUE').item()
+# communities_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_communities_results.npy',allow_pickle='TRUE').item()
+# community_bus_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_bus_results.npy',allow_pickle='TRUE').item()
+# community_lines_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_lines_results.npy',allow_pickle='TRUE').item()
 
 for day in range(0, n_days):
     ### PLOTTING NETWORK IN PANDAPOWER
