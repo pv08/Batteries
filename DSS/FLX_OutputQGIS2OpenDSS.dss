@@ -1,0 +1,10 @@
+
+redirect Bibliotecas/bibliotecas.dss
+redirect FLX_LinesMV.dss
+redirect FLX_Substation.dss
+redirect FLX_Transformers.dss
+redirect FLX_Monitors.dss
+redirect FLX_LinesLV.dss
+redirect FLX_Loadshapes.dss
+redirect FLX_LoadsLV.dss
+redirect FLX_DG.dss

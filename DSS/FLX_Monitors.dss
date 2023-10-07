@@ -1,0 +1,169 @@
+new monitor.MonMV3PFLX0 Element=line.MV3PFLX0 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX1 Element=line.MV3PFLX1 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX2 Element=line.MV3PFLX2 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX3 Element=line.MV1PFLX3 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX4 Element=line.MV1PFLX4 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX5 Element=line.MV3PFLX5 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX6 Element=line.MV3PFLX6 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX7 Element=line.MV3PFLX7 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX8 Element=line.MV3PFLX8 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX9 Element=line.MV3PFLX9 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX10 Element=line.MV1PFLX10 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX11 Element=line.MV1PFLX11 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX12 Element=line.MV3PFLX12 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX13 Element=line.MV3PFLX13 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX14 Element=line.MV3PFLX14 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX15 Element=line.MV3PFLX15 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX16 Element=line.MV3PFLX16 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX17 Element=line.MV1PFLX17 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX18 Element=line.MV1PFLX18 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX19 Element=line.MV3PFLX19 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX20 Element=line.MV3PFLX20 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX21 Element=line.MV3PFLX21 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX22 Element=line.MV3PFLX22 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX23 Element=line.MV3PFLX23 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX24 Element=line.MV3PFLX24 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX25 Element=line.MV3PFLX25 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX26 Element=line.MV3PFLX26 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX27 Element=line.MV3PFLX27 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX28 Element=line.MV1PFLX28 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX29 Element=line.MV3PFLX29 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX30 Element=line.MV3PFLX30 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX31 Element=line.MV3PFLX31 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX32 Element=line.MV3PFLX32 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX33 Element=line.MV3PFLX33 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX34 Element=line.MV1PFLX34 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX35 Element=line.MV3PFLX35 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX36 Element=line.MV1PFLX36 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX37 Element=line.MV1PFLX37 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX38 Element=line.MV3PFLX38 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX39 Element=line.MV1PFLX39 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX40 Element=line.MV1PFLX40 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX41 Element=line.MV1PFLX41 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX42 Element=line.MV3PFLX42 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX43 Element=line.MV3PFLX43 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX44 Element=line.MV3PFLX44 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX45 Element=line.MV3PFLX45 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX46 Element=line.MV3PFLX46 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX47 Element=line.MV3PFLX47 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX48 Element=line.MV1PFLX48 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX49 Element=line.MV1PFLX49 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX50 Element=line.MV3PFLX50 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX51 Element=line.MV3PFLX51 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX52 Element=line.MV1PFLX52 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX53 Element=line.MV1PFLX53 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX54 Element=line.MV3PFLX54 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX55 Element=line.MV3PFLX55 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX56 Element=line.MV3PFLX56 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX57 Element=line.MV3PFLX57 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX58 Element=line.MV3PFLX58 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX59 Element=line.MV3PFLX59 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX60 Element=line.MV3PFLX60 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX61 Element=line.MV3PFLX61 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX62 Element=line.MV3PFLX62 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX63 Element=line.MV1PFLX63 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX64 Element=line.MV3PFLX64 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX65 Element=line.MV1PFLX65 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX66 Element=line.MV1PFLX66 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX67 Element=line.MV3PFLX67 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX68 Element=line.MV1PFLX68 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX69 Element=line.MV1PFLX69 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX70 Element=line.MV1PFLX70 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX71 Element=line.MV1PFLX71 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX72 Element=line.MV1PFLX72 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX73 Element=line.MV1PFLX73 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX74 Element=line.MV1PFLX74 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX75 Element=line.MV1PFLX75 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX76 Element=line.MV1PFLX76 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX77 Element=line.MV1PFLX77 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX78 Element=line.MV3PFLX78 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX79 Element=line.MV1PFLX79 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX80 Element=line.MV3PFLX80 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX81 Element=line.MV3PFLX81 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX82 Element=line.MV3PFLX82 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX83 Element=line.MV1PFLX83 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX84 Element=line.MV3PFLX84 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX85 Element=line.MV1PFLX85 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX86 Element=line.MV1PFLX86 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX87 Element=line.MV1PFLX87 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX88 Element=line.MV3PFLX88 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX89 Element=line.MV3PFLX89 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX90 Element=line.MV3PFLX90 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX91 Element=line.MV3PFLX91 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX92 Element=line.MV3PFLX92 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX93 Element=line.MV3PFLX93 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX94 Element=line.MV1PFLX94 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX95 Element=line.MV1PFLX95 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX96 Element=line.MV1PFLX96 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX97 Element=line.MV1PFLX97 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX98 Element=line.MV1PFLX98 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX99 Element=line.MV1PFLX99 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX100 Element=line.MV3PFLX100 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX101 Element=line.MV1PFLX101 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX102 Element=line.MV1PFLX102 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX103 Element=line.MV1PFLX103 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX104 Element=line.MV1PFLX104 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX105 Element=line.MV1PFLX105 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX106 Element=line.MV1PFLX106 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX107 Element=line.MV3PFLX107 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX108 Element=line.MV3PFLX108 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX109 Element=line.MV3PFLX109 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX110 Element=line.MV3PFLX110 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX111 Element=line.MV3PFLX111 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX112 Element=line.MV1PFLX112 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX113 Element=line.MV1PFLX113 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX114 Element=line.MV1PFLX114 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX115 Element=line.MV3PFLX115 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX116 Element=line.MV3PFLX116 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX117 Element=line.MV3PFLX117 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX118 Element=line.MV3PFLX118 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV3PFLX119 Element=line.MV3PFLX119 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX120 Element=line.MV1PFLX120 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX121 Element=line.MV1PFLX121 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonMV1PFLX122 Element=line.MV1PFLX122 Terminal=1 Mode=0  !1ph_basekV=19.9186
+new monitor.MonFLX1P_1 Element=transformer.FLX1P_1 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_2 Element=transformer.FLX1P_2 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_3 Element=transformer.FLX1P_3 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_4 Element=transformer.FLX1P_4 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_5 Element=transformer.FLX1P_5 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_6 Element=transformer.FLX1P_6 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_7 Element=transformer.FLX1P_7 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_8 Element=transformer.FLX1P_8 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_9 Element=transformer.FLX1P_9 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_10 Element=transformer.FLX1P_10 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_11 Element=transformer.FLX1P_11 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_12 Element=transformer.FLX1P_12 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_13 Element=transformer.FLX1P_13 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_14 Element=transformer.FLX1P_14 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_15 Element=transformer.FLX1P_15 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_16 Element=transformer.FLX1P_16 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_17 Element=transformer.FLX1P_17 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_18 Element=transformer.FLX1P_18 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_19 Element=transformer.FLX1P_19 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_20 Element=transformer.FLX1P_20 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_21 Element=transformer.FLX1P_21 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_22 Element=transformer.FLX1P_22 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_23 Element=transformer.FLX1P_23 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX1P_24 Element=transformer.FLX1P_24 Terminal=1 Mode=1  !Group=N/A
+new monitor.MonFLX3P_1 Element=transformer.FLX3P_1 Terminal=1 Mode=1
+new monitor.MonFLX3P_2 Element=transformer.FLX3P_2 Terminal=1 Mode=1
+new monitor.MonFLX3P_3 Element=transformer.FLX3P_3 Terminal=1 Mode=1
+new monitor.MonFLX3P_4 Element=transformer.FLX3P_4 Terminal=1 Mode=1
+new monitor.MonFLX3P_5 Element=transformer.FLX3P_5 Terminal=1 Mode=1
+new monitor.MonFLX3P_6 Element=transformer.FLX3P_6 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_1_1 Element=transformer.FLX3U3P_1_1 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_2_1 Element=transformer.FLX3U3P_2_1 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_3_1 Element=transformer.FLX3U3P_3_1 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_1_2 Element=transformer.FLX3U3P_1_2 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_2_2 Element=transformer.FLX3U3P_2_2 Terminal=1 Mode=1
+new monitor.MonFLX3U3P_3_2 Element=transformer.FLX3U3P_3_2 Terminal=1 Mode=1
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!new monitor.PV_voltage element=PVSystem.PV1FFLX001 terminal=1 mode=0
+!new monitor.PV_power element=PVSystem.PV1FFLX001 terminal=1 mode=1 ppolar=no
+!new monitor.PV_variables element=PVSystem.PV1FFLX001 terminal=1 mode=3
+!new monitor.Load_voltage element=load.3FFLX001 terminal=1 mode=0
+!new monitor.Load_power element=load.3FFLX001 terminal=1 mode=1 ppolar=no
+!new monitor.Load_variables element=load.3FFLX001 terminal=1 mode=3
+!new monitor.Battery_voltage element=Storage.BAT1FFLX001 terminal=1 mode=0
+!new monitor.Battery_power element=Storage.BAT1FFLX001 terminal=1 mode=1 ppolar=no
+!new monitor.Battery_variables element=Storage.BAT1FFLX001 terminal=1 mode=3

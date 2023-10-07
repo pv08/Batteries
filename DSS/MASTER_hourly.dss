@@ -1,0 +1,71 @@
+clear
+set defaultbasefrequency=60
+new circuit.SJU BasekV=138 pu=1.00 angle=0 frequency=60 phases=3 Isc3=10000.0 Isc1=10500.0
+
+redirect Bibliotecas/bibliotecas.dss
+redirect FLX_LinesMV.dss
+redirect FLX_Substation.dss
+redirect FLX_Transformers.dss
+redirect FLX_Monitors.dss
+redirect FLX_LinesLV.dss
+
+!redirect FLX_Loadshapes_Nom_hourly.dss
+redirect FLX_Loadshapes_Nom_hourly_edited.dss
+
+!Case Study 01
+!redirect FLX_DG_Caso01.dss
+!redirect FLX_LoadsLV_Caso01.dss
+!redirect FLX_Storage_Caso01.dss
+
+!Case Study 02
+!redirect FLX_LoadsLV_Caso02.dss
+!redirect FLX_DG_Caso02.dss
+!redirect FLX_Storage_Caso02.dss
+
+!Case Study 03
+!redirect FLX_LoadsLV_Caso03.dss
+!redirect FLX_DG_Caso03.dss
+!redirect FLX_Storage_Caso03.dss
+
+!Case Study 04
+!redirect FLX_LoadsLV_Caso04.dss
+!redirect FLX_DG_Caso04.dss
+!redirect FLX_Storage_Caso04.dss
+
+!Case Study 05
+!redirect FLX_LoadsLV_Caso05.dss
+!redirect FLX_DG_Caso05.dss
+!redirect FLX_Storage_Caso05.dss
+
+!Case Study 06
+redirect FLX_LoadsLV_Caso06.dss
+redirect FLX_DG_Caso06.dss
+redirect FLX_Storage_Caso06.dss
+
+!Case Study 07
+!redirect FLX_LoadsLV_Caso07.dss
+!redirect FLX_DG_Caso07.dss
+!redirect FLX_Storage_Caso07.dss
+
+!Define Bus Coordinates
+buscoords FLX_BusListMV.csv
+buscoords FLX_BusListLV.csv
+
+!new monitor.Battery_voltage element=Storage.BAT1FFLX001 terminal=1 mode=0
+!new monitor.Battery_power element=Storage.BAT1FFLX001 terminal=1 mode=1 ppolar=no
+!new monitor.Battery_variables element=Storage.BAT1FFLX001 terminal=1 mode=3
+
+set mode=daily 
+set stepsize=1h
+set number=1
+
+!set hour=0
+!set casename=hour_xx
+!solve
+
+!plot profile phases=all
+!plot circuit Power max=2000 n n C1=$00FF0000
+
+!Export monitors monmv3pflx0
+!Export monitors monmv3pflx35
+!Export monitors monflx3u3p_3_1

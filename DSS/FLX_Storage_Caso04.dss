@@ -1,0 +1,24 @@
+!!! DADOS BANCO DE BATERIAS USADO NO TRABALHO DA WANESSA
+!New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=0.4125 kwhrated=1.65 dispmode=follow daily=BatteryProfile
+!!! DADOS BANCO DE BATERIAS COMERCIAL - WEBSITE DISPONIVEL NA DISSERTACAO
+!New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=2.56 kwhrated=10.24 dispmode=follow daily=BatteryProfile
+!!!!!BATTERY SIZE = 01!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=2.56 kwhrated=10.24 dispmode=follow daily=BatteryProfile
+New Storage.BAT3FFLX010 phases=1 Bus1=BUSLVFLX1270.1.2.3 kv=0.24 kwrated=2.56 kwhrated=10.24 dispmode=follow daily=BatteryProfile
+New Storage.BAT3FFLX011 phases=1 Bus1=BUSLVFLX1271.1.2.3 kv=0.24 kwrated=2.56 kwhrated=10.24 dispmode=follow daily=BatteryProfile
+New Storage.BAT3FFLX012 phases=1 Bus1=BUSLVFLX1272.1.2.3 kv=0.24 kwrated=2.56 kwhrated=10.24 dispmode=follow daily=BatteryProfile
+!!!!!BATTERY SIZE = 03!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=7.68 kwhrated=30.72 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX010 phases=1 Bus1=BUSLVFLX1270.1.2.3 kv=0.24 kwrated=7.68 kwhrated=30.72 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX011 phases=1 Bus1=BUSLVFLX1271.1.2.3 kv=0.24 kwrated=7.68 kwhrated=30.72 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX012 phases=1 Bus1=BUSLVFLX1272.1.2.3 kv=0.24 kwrated=7.68 kwhrated=30.72 dispmode=follow daily=BatteryProfile
+!!!!!BATTERY SIZE = 05!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=12.8 kwhrated=51.2 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX010 phases=1 Bus1=BUSLVFLX1270.1.2.3 kv=0.24 kwrated=12.8 kwhrated=51.2 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX011 phases=1 Bus1=BUSLVFLX1271.1.2.3 kv=0.24 kwrated=12.8 kwhrated=51.2 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX012 phases=1 Bus1=BUSLVFLX1272.1.2.3 kv=0.24 kwrated=12.8 kwhrated=51.2 dispmode=follow daily=BatteryProfile
+!!!!!BATTERY SIZE = 10!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!New Storage.BAT3FFLX009 phases=1 Bus1=BUSLVFLX1264.1.2.3 kv=0.24 kwrated=25.6 kwhrated=102.4 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX010 phases=1 Bus1=BUSLVFLX1270.1.2.3 kv=0.24 kwrated=25.6 kwhrated=102.4 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX011 phases=1 Bus1=BUSLVFLX1271.1.2.3 kv=0.24 kwrated=25.6 kwhrated=102.4 dispmode=follow daily=BatteryProfile
+!New Storage.BAT3FFLX012 phases=1 Bus1=BUSLVFLX1272.1.2.3 kv=0.24 kwrated=25.6 kwhrated=102.4 dispmode=follow daily=BatteryProfile
