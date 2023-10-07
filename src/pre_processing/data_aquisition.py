@@ -22,10 +22,21 @@ class DefaultGridData(DataAquisition):
         self.preprocessAgent()
 
         self.community_buses = self.agent_df.head(self.args['n_agents'] - 2)['BUS'].unique()
-        community_lines = []
+        self.community_lines = []
+        for i in range(0, self.args['n_agents'] - 2):
+            bus = self.agent_df['BUS'][i]
+            if bus in self.data['LinesListLV']['BUS_FROM'].values:
+                idx = [i for i, j in enumerate(self.data['LinesListLV']['BUS_FROM']) if j == bus]
+                for i in range(0, len(idx)):
+                    self.community_lines.append(self.data['LinesListLV']['NAME'][idx[i]])
+            if bus in self.data['LinesListLV']['BUS_TO']:
+                idx = [i for i, j in enumerate(self.data['LinesListLV']['BUS_TO']) if j == bus]
+                for i in range(0, len(idx)):
+                    self.community_lines.append(self.data['LinesListLV']['NAME'][idx[i]])
+            self.community_lines = list(set(self.community_lines))
 
-
-
+        self.num_community_buses = len(self.community_buses)
+        self.num_community_lines = len(self.community_lines)
 
     def paramConstruction(self):
         self.len_load = self.data[f'LoadsList_Caso0{self.args.case}'].shape[0]
