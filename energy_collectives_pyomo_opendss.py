@@ -30,28 +30,28 @@ battery_size = 0    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base batt
 
 # ...::: IMPORTING DATA :::...
 # HIGH VOLTAGE BUSES DATA
-hvbus_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/BusListHV.csv", delimiter=',')
+hvbus_data = pd.read_csv(r"data/dss_data/BusListHV.csv", delimiter=',')
 hvbus_names = hvbus_data['NAME']
 hvbus_basekv = hvbus_data['BASE_KV']
 hvbus_latitude = hvbus_data['LATITUDE']
 hvbus_longitude = hvbus_data['LONGITUDE']
 hvbus_geodata = list(zip(hvbus_latitude, hvbus_longitude))
 # MEDIUM VOLTAGE BUSES DATA
-mvbus_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/BusListMV.csv", delimiter=',')
+mvbus_data = pd.read_csv(r"data/dss_data/BusListMV.csv", delimiter=',')
 mvbus_names = mvbus_data['NAME']
 mvbus_basekv = mvbus_data['BASE_KV']
 mvbus_latitude = mvbus_data['LATITUDE']
 mvbus_longitude = mvbus_data['LONGITUDE']
 mvbus_geodata = list(zip(mvbus_latitude, mvbus_longitude))
 # LOW VOLTAGE BUSES DATA
-lvbus_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/BusListLV.csv", delimiter=',')
+lvbus_data = pd.read_csv(r"data/dss_data/BusListLV.csv", delimiter=',')
 lvbus_names = lvbus_data['NAME']
 lvbus_basekv = lvbus_data['BASE_KV']
 lvbus_latitude = lvbus_data['LATITUDE']
 lvbus_longitude = lvbus_data['LONGITUDE']
 lvbus_geodata = list(zip(lvbus_latitude, lvbus_longitude))
 # MEDIUM VOLTAGE LINES DATA
-mvline_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/LinesListMV.csv", delimiter=',')
+mvline_data = pd.read_csv(r"data/dss_data/LinesListMV.csv", delimiter=',')
 mvline_names = mvline_data['NAME']
 mvline_from = mvline_data['BUS_FROM']
 mvline_to = mvline_data['BUS_TO']
@@ -59,7 +59,7 @@ mvline_length = mvline_data['LENGTH[M]']
 mvline_geometry = mvline_data['GEOMETRY']
 mvline_basekv = mvline_data['BASE_KV']
 # LOW VOLTAGE LINES DATA
-lvline_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/LinesListLV.csv", delimiter=',')
+lvline_data = pd.read_csv(r"data/dss_data/LinesListLV.csv", delimiter=',')
 lvline_names = lvline_data['NAME']
 lvline_from = lvline_data['BUS_FROM']
 lvline_to = lvline_data['BUS_TO']
@@ -67,7 +67,7 @@ lvline_length = lvline_data['LENGTH[M]']
 lvline_geometry = lvline_data['GEOMETRY']
 lvline_basekv = lvline_data['BASE_KV']
 # SUBSTATIONS DATA - THREE WINDING TRANSFORMER
-trafo3w_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/SubstationList.csv", delimiter=',')
+trafo3w_data = pd.read_csv(r"data/dss_data/SubstationList.csv", delimiter=',')
 trafo3w_names = trafo3w_data['NAME']
 trafo3w_hvbus = trafo3w_data['HV_BUS']
 trafo3w_mvbus = trafo3w_data['MV_BUS']
@@ -87,7 +87,7 @@ trafo3w_lvvscr = trafo3w_data['VKR_LV_PERCENT']
 trafo3w_pfe = trafo3w_data['PFE_KW']
 trafo3w_i0 = trafo3w_data['I0_PERCENT']
 # TRANSFORMERS DATA
-trafo_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/TransformersList.csv", delimiter=',')
+trafo_data = pd.read_csv(r"data/dss_data/TransformersList.csv", delimiter=',')
 trafo_names = trafo_data['NAME']
 trafo_hvbus = trafo_data['HV_BUS']
 trafo_lvbus = trafo_data['LV_BUS']
@@ -99,7 +99,7 @@ trafo_vsc = trafo_data['VK_PERCENT']
 trafo_pfe = trafo_data['PFE_KW']
 trafo_i0 = trafo_data['I0_PERCENT']
 # LOADS DATA
-load_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/LoadsList_Caso0%s.csv" % case, delimiter=',')
+load_data = pd.read_csv(r"data/dss_data/LoadsList_Caso0%s.csv" % case, delimiter=',')
 load_name = load_data['NAME']
 load_bus = load_data['BUS']
 load_basekv = load_data['BASE_KV']
@@ -110,7 +110,7 @@ load_loadshape = load_data['LOADSHAPE']
 load_kwh = load_data['KWH']
 load_community = load_data['COMMUNITY']
 # GENERATORS DATA
-gen_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/PvList_Caso0%s.csv" % case, delimiter=',')
+gen_data = pd.read_csv(r"data/dss_data/PvList_Caso0%s.csv" % case, delimiter=',')
 gen_name = gen_data['NAME']
 gen_bus = gen_data['BUS']
 gen_basekv = gen_data['BASE_KV']
@@ -121,7 +121,7 @@ gen_basekw = gen_data['BASE_KW']
 gen_genshape = gen_data['GEN_SHAPE']
 gen_community = gen_data['COMMUNITY']
 # STORAGE DATA - COMMUNITY BATTERIES
-bat_data = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/BatteryList_Caso0%s.csv" % case, delimiter=',')
+bat_data = pd.read_csv(r"data/dss_data/BatteryList_Caso0%s.csv" % case, delimiter=',')
 bat_name = bat_data['NAME']
 bat_bus = bat_data['BUS']
 bat_community = bat_data['COMMUNITY']
@@ -141,199 +141,199 @@ bat_loadshape = bat_data['LOADSHAPE']
 
 # XXX - FUNCTION TO FILTER LOADSHAPE AND GENSHAPE CURVES
 def profile_curves():
-    # profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles"
-    profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/"
+    # profiles_path = r"data/profiles"
+    profiles_path = r"data/profiles_edited/"
     # PV PROFILE
-    BatteryProfile = pd.read_csv('%s/storage/BatteryProfile.txt' % profiles_path,sep='\n',header=None)
+    BatteryProfile = pd.read_csv('%s/storage/BatteryProfile.txt' % profiles_path, header=None)
     # PV PROFILE
-    PVprofile = pd.read_csv('%s/DG/PVprofile.txt' % profiles_path,sep='\n',header=None)
+    PVprofile = pd.read_csv('%s/DG/PVprofile.txt' % profiles_path, header=None)
     # COMERCIAL PROFILE
-    curve349_00C = pd.read_csv('%s/commercial/curve349_00C.txt' % profiles_path, sep='\n', header=None)
-    curve798_69C = pd.read_csv('%s/commercial/curve798_69C.txt' % profiles_path, sep='\n', header=None)
+    curve349_00C = pd.read_csv('%s/commercial/curve349_00C.txt' % profiles_path,   header=None)
+    curve798_69C = pd.read_csv('%s/commercial/curve798_69C.txt' % profiles_path,   header=None)
     # INDUSTRIAL PROFILE
-    curve52756_83I = pd.read_csv('%s/industrial/curve52756_83I.txt' % profiles_path, sep='\n', header=None)
-    curve149733_90I = pd.read_csv('%s/industrial/curve149733_90I.txt' % profiles_path, sep='\n', header=None)
-    curve192342_97I = pd.read_csv('%s/industrial/curve192342_97I.txt' % profiles_path, sep='\n', header=None)
+    curve52756_83I = pd.read_csv('%s/industrial/curve52756_83I.txt' % profiles_path,   header=None)
+    curve149733_90I = pd.read_csv('%s/industrial/curve149733_90I.txt' % profiles_path,   header=None)
+    curve192342_97I = pd.read_csv('%s/industrial/curve192342_97I.txt' % profiles_path,   header=None)
     # RESIDENTIAL PROFILE
-    curve0_00R = pd.read_csv('%s/residential/curve0_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1003_00R = pd.read_csv('%s/residential/curve1003_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1032_00R = pd.read_csv('%s/residential/curve1032_00R.txt' % profiles_path, sep='\n', header=None)
-    curve103_00R = pd.read_csv('%s/residential/curve103_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1064_00R = pd.read_csv('%s/residential/curve1064_00R.txt' % profiles_path, sep='\n', header=None)
-    curve107_00R = pd.read_csv('%s/residential/curve107_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1094_00R = pd.read_csv('%s/residential/curve1094_00R.txt' % profiles_path, sep='\n', header=None)
-    curve10_00R = pd.read_csv('%s/residential/curve10_00R.txt' % profiles_path, sep='\n', header=None)
-    curve112_00R = pd.read_csv('%s/residential/curve112_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1138_00R = pd.read_csv('%s/residential/curve1138_00R.txt' % profiles_path, sep='\n', header=None)
-    curve115_00R = pd.read_csv('%s/residential/curve115_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1180_00R = pd.read_csv('%s/residential/curve1180_00R.txt' % profiles_path, sep='\n', header=None)
-    curve118_00R = pd.read_csv('%s/residential/curve118_00R.txt' % profiles_path, sep='\n', header=None)
-    curve11_00R = pd.read_csv('%s/residential/curve11_00R.txt' % profiles_path, sep='\n', header=None)
-    curve121_00R = pd.read_csv('%s/residential/curve121_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1229_00R = pd.read_csv('%s/residential/curve1229_00R.txt' % profiles_path, sep='\n', header=None)
-    curve124_00R = pd.read_csv('%s/residential/curve124_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1272_00R = pd.read_csv('%s/residential/curve1272_00R.txt' % profiles_path, sep='\n', header=None)
-    curve127_00R = pd.read_csv('%s/residential/curve127_00R.txt' % profiles_path, sep='\n', header=None)
-    curve12_00R = pd.read_csv('%s/residential/curve12_00R.txt' % profiles_path, sep='\n', header=None)
-    curve132_00R = pd.read_csv('%s/residential/curve132_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1344_00R = pd.read_csv('%s/residential/curve1344_00R.txt' % profiles_path, sep='\n', header=None)
-    curve136_00R = pd.read_csv('%s/residential/curve136_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1380_00R = pd.read_csv('%s/residential/curve1380_00R.txt' % profiles_path, sep='\n', header=None)
-    curve139_43R = pd.read_csv('%s/residential/curve139_43R.txt' % profiles_path, sep='\n', header=None)
-    curve13_00R = pd.read_csv('%s/residential/curve13_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1416_00R = pd.read_csv('%s/residential/curve1416_00R.txt' % profiles_path, sep='\n', header=None)
-    curve143_00R = pd.read_csv('%s/residential/curve143_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1448_00R = pd.read_csv('%s/residential/curve1448_00R.txt' % profiles_path, sep='\n', header=None)
-    curve146_00R = pd.read_csv('%s/residential/curve146_00R.txt' % profiles_path, sep='\n', header=None)
-    curve14_00R = pd.read_csv('%s/residential/curve14_00R.txt' % profiles_path, sep='\n', header=None)
-    curve150_00R = pd.read_csv('%s/residential/curve150_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1544_00R = pd.read_csv('%s/residential/curve1544_00R.txt' % profiles_path, sep='\n', header=None)
-    curve154_00R = pd.read_csv('%s/residential/curve154_00R.txt' % profiles_path, sep='\n', header=None)
-    curve158_00R = pd.read_csv('%s/residential/curve158_00R.txt' % profiles_path, sep='\n', header=None)
-    curve162_00R = pd.read_csv('%s/residential/curve162_00R.txt' % profiles_path, sep='\n', header=None)
-    curve167_00R = pd.read_csv('%s/residential/curve167_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1688_00R = pd.read_csv('%s/residential/curve1688_00R.txt' % profiles_path, sep='\n', header=None)
-    curve16_00R = pd.read_csv('%s/residential/curve16_00R.txt' % profiles_path, sep='\n', header=None)
-    curve172_00R = pd.read_csv('%s/residential/curve172_00R.txt' % profiles_path, sep='\n', header=None)
-    curve177_00R = pd.read_csv('%s/residential/curve177_00R.txt' % profiles_path, sep='\n', header=None)
-    curve180_93R = pd.read_csv('%s/residential/curve180_93R.txt' % profiles_path, sep='\n', header=None)
-    curve1840_00R = pd.read_csv('%s/residential/curve1840_00R.txt' % profiles_path, sep='\n', header=None)
-    curve188_00R = pd.read_csv('%s/residential/curve188_00R.txt' % profiles_path, sep='\n', header=None)
-    curve18_00R = pd.read_csv('%s/residential/curve18_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1912_00R = pd.read_csv('%s/residential/curve1912_00R.txt' % profiles_path, sep='\n', header=None)
-    curve194_00R = pd.read_csv('%s/residential/curve194_00R.txt' % profiles_path, sep='\n', header=None)
-    curve198_33R = pd.read_csv('%s/residential/curve198_33R.txt' % profiles_path, sep='\n', header=None)
-    curve19_00R = pd.read_csv('%s/residential/curve19_00R.txt' % profiles_path, sep='\n', header=None)
-    curve1_00R = pd.read_csv('%s/residential/curve1_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2037_00R = pd.read_csv('%s/residential/curve2037_00R.txt' % profiles_path, sep='\n', header=None)
-    curve207_00R = pd.read_csv('%s/residential/curve207_00R.txt' % profiles_path, sep='\n', header=None)
-    curve20_00R = pd.read_csv('%s/residential/curve20_00R.txt' % profiles_path, sep='\n', header=None)
-    curve211_74R = pd.read_csv('%s/residential/curve211_74R.txt' % profiles_path, sep='\n', header=None)
-    curve215_30R = pd.read_csv('%s/residential/curve215_30R.txt' % profiles_path, sep='\n', header=None)
-    curve217_83R = pd.read_csv('%s/residential/curve217_83R.txt' % profiles_path, sep='\n', header=None)
-    curve2180_00R = pd.read_csv('%s/residential/curve2180_00R.txt' % profiles_path, sep='\n', header=None)
-    curve219_48R = pd.read_csv('%s/residential/curve219_48R.txt' % profiles_path, sep='\n', header=None)
-    curve225_00R = pd.read_csv('%s/residential/curve225_00R.txt' % profiles_path, sep='\n', header=None)
-    curve22_00R = pd.read_csv('%s/residential/curve22_00R.txt' % profiles_path, sep='\n', header=None)
-    curve230_00R = pd.read_csv('%s/residential/curve230_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2340_00R = pd.read_csv('%s/residential/curve2340_00R.txt' % profiles_path, sep='\n', header=None)
-    curve235_80R = pd.read_csv('%s/residential/curve235_80R.txt' % profiles_path, sep='\n', header=None)
-    curve2397_21R = pd.read_csv('%s/residential/curve2397_21R.txt' % profiles_path, sep='\n', header=None)
-    curve23_00R = pd.read_csv('%s/residential/curve23_00R.txt' % profiles_path, sep='\n', header=None)
-    curve242_00R = pd.read_csv('%s/residential/curve242_00R.txt' % profiles_path, sep='\n', header=None)
-    curve248_00R = pd.read_csv('%s/residential/curve248_00R.txt' % profiles_path, sep='\n', header=None)
-    curve24_00R = pd.read_csv('%s/residential/curve24_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2500_00R = pd.read_csv('%s/residential/curve2500_00R.txt' % profiles_path, sep='\n', header=None)
-    curve255_96R = pd.read_csv('%s/residential/curve255_96R.txt' % profiles_path, sep='\n', header=None)
-    curve25_00R = pd.read_csv('%s/residential/curve25_00R.txt' % profiles_path, sep='\n', header=None)
-    curve264_00R = pd.read_csv('%s/residential/curve264_00R.txt' % profiles_path, sep='\n', header=None)
-    curve269_45R = pd.read_csv('%s/residential/curve269_45R.txt' % profiles_path, sep='\n', header=None)
-    curve275_00R = pd.read_csv('%s/residential/curve275_00R.txt' % profiles_path, sep='\n', header=None)
-    curve27_00R = pd.read_csv('%s/residential/curve27_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2816_00R = pd.read_csv('%s/residential/curve2816_00R.txt' % profiles_path, sep='\n', header=None)
-    curve283_00R = pd.read_csv('%s/residential/curve283_00R.txt' % profiles_path, sep='\n', header=None)
-    curve28_00R = pd.read_csv('%s/residential/curve28_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2919_00R = pd.read_csv('%s/residential/curve2919_00R.txt' % profiles_path, sep='\n', header=None)
-    curve292_50R = pd.read_csv('%s/residential/curve292_50R.txt' % profiles_path, sep='\n', header=None)
-    curve299_22R = pd.read_csv('%s/residential/curve299_22R.txt' % profiles_path, sep='\n', header=None)
-    curve29_00R = pd.read_csv('%s/residential/curve29_00R.txt' % profiles_path, sep='\n', header=None)
-    curve2_00R = pd.read_csv('%s/residential/curve2_00R.txt' % profiles_path, sep='\n', header=None)
-    curve301_77R = pd.read_csv('%s/residential/curve301_77R.txt' % profiles_path, sep='\n', header=None)
-    curve3033_00R = pd.read_csv('%s/residential/curve3033_00R.txt' % profiles_path, sep='\n', header=None)
-    curve304_21R = pd.read_csv('%s/residential/curve304_21R.txt' % profiles_path, sep='\n', header=None)
-    curve30_00R = pd.read_csv('%s/residential/curve30_00R.txt' % profiles_path, sep='\n', header=None)
-    curve313_00R = pd.read_csv('%s/residential/curve313_00R.txt' % profiles_path, sep='\n', header=None)
-    curve31_00R = pd.read_csv('%s/residential/curve31_00R.txt' % profiles_path, sep='\n', header=None)
-    curve325_00R = pd.read_csv('%s/residential/curve325_00R.txt' % profiles_path, sep='\n', header=None)
-    curve32_00R = pd.read_csv('%s/residential/curve32_00R.txt' % profiles_path, sep='\n', header=None)
-    curve332_00R = pd.read_csv('%s/residential/curve332_00R.txt' % profiles_path, sep='\n', header=None)
-    curve3332_00R = pd.read_csv('%s/residential/curve3332_00R.txt' % profiles_path, sep='\n', header=None)
-    curve339_00R = pd.read_csv('%s/residential/curve339_00R.txt' % profiles_path, sep='\n', header=None)
-    curve33_00R = pd.read_csv('%s/residential/curve33_00R.txt' % profiles_path, sep='\n', header=None)
-    curve346_00R = pd.read_csv('%s/residential/curve346_00R.txt' % profiles_path, sep='\n', header=None)
-    curve34_00R = pd.read_csv('%s/residential/curve34_00R.txt' % profiles_path, sep='\n', header=None)
-    curve353_33R = pd.read_csv('%s/residential/curve353_33R.txt' % profiles_path, sep='\n', header=None)
-    curve35_00R = pd.read_csv('%s/residential/curve35_00R.txt' % profiles_path, sep='\n', header=None)
-    curve361_00R = pd.read_csv('%s/residential/curve361_00R.txt' % profiles_path, sep='\n', header=None)
-    curve3652_00R = pd.read_csv('%s/residential/curve3652_00R.txt' % profiles_path, sep='\n', header=None)
-    curve369_00R = pd.read_csv('%s/residential/curve369_00R.txt' % profiles_path, sep='\n', header=None)
-    curve36_00R = pd.read_csv('%s/residential/curve36_00R.txt' % profiles_path, sep='\n', header=None)
-    curve37_00R = pd.read_csv('%s/residential/curve37_00R.txt' % profiles_path, sep='\n', header=None)
-    curve380_00R = pd.read_csv('%s/residential/curve380_00R.txt' % profiles_path, sep='\n', header=None)
-    curve38_00R = pd.read_csv('%s/residential/curve38_00R.txt' % profiles_path, sep='\n', header=None)
-    curve390_02R = pd.read_csv('%s/residential/curve390_02R.txt' % profiles_path, sep='\n', header=None)
-    curve39_00R = pd.read_csv('%s/residential/curve39_00R.txt' % profiles_path, sep='\n', header=None)
-    curve3_00R = pd.read_csv('%s/residential/curve3_00R.txt' % profiles_path, sep='\n', header=None)
-    curve401_82R = pd.read_csv('%s/residential/curve401_82R.txt' % profiles_path, sep='\n', header=None)
-    curve40_00R = pd.read_csv('%s/residential/curve40_00R.txt' % profiles_path, sep='\n', header=None)
-    curve413_00R = pd.read_csv('%s/residential/curve413_00R.txt' % profiles_path, sep='\n', header=None)
-    curve41_00R = pd.read_csv('%s/residential/curve41_00R.txt' % profiles_path, sep='\n', header=None)
-    curve423_36R = pd.read_csv('%s/residential/curve423_36R.txt' % profiles_path, sep='\n', header=None)
-    curve434_00R = pd.read_csv('%s/residential/curve434_00R.txt' % profiles_path, sep='\n', header=None)
-    curve43_00R = pd.read_csv('%s/residential/curve43_00R.txt' % profiles_path, sep='\n', header=None)
-    curve445_44R = pd.read_csv('%s/residential/curve445_44R.txt' % profiles_path, sep='\n', header=None)
-    curve459_00R = pd.read_csv('%s/residential/curve459_00R.txt' % profiles_path, sep='\n', header=None)
-    curve45_00R = pd.read_csv('%s/residential/curve45_00R.txt' % profiles_path, sep='\n', header=None)
-    curve46_00R = pd.read_csv('%s/residential/curve46_00R.txt' % profiles_path, sep='\n', header=None)
-    curve470_34R = pd.read_csv('%s/residential/curve470_34R.txt' % profiles_path, sep='\n', header=None)
-    curve47_00R = pd.read_csv('%s/residential/curve47_00R.txt' % profiles_path, sep='\n', header=None)
-    curve481_00R = pd.read_csv('%s/residential/curve481_00R.txt' % profiles_path, sep='\n', header=None)
-    curve48_00R = pd.read_csv('%s/residential/curve48_00R.txt' % profiles_path, sep='\n', header=None)
-    curve495_60R = pd.read_csv('%s/residential/curve495_60R.txt' % profiles_path, sep='\n', header=None)
-    curve49_00R = pd.read_csv('%s/residential/curve49_00R.txt' % profiles_path, sep='\n', header=None)
-    curve4_00R = pd.read_csv('%s/residential/curve4_00R.txt' % profiles_path, sep='\n', header=None)
-    curve506_00R = pd.read_csv('%s/residential/curve506_00R.txt' % profiles_path, sep='\n', header=None)
-    curve519_00R = pd.read_csv('%s/residential/curve519_00R.txt' % profiles_path, sep='\n', header=None)
-    curve51_00R = pd.read_csv('%s/residential/curve51_00R.txt' % profiles_path, sep='\n', header=None)
-    curve530_25R = pd.read_csv('%s/residential/curve530_25R.txt' % profiles_path, sep='\n', header=None)
-    curve53_00R = pd.read_csv('%s/residential/curve53_00R.txt' % profiles_path, sep='\n', header=None)
-    curve544_45R = pd.read_csv('%s/residential/curve544_45R.txt' % profiles_path, sep='\n', header=None)
-    curve556_00R = pd.read_csv('%s/residential/curve556_00R.txt' % profiles_path, sep='\n', header=None)
-    curve5572_00R = pd.read_csv('%s/residential/curve5572_00R.txt' % profiles_path, sep='\n', header=None)
-    curve567_55R = pd.read_csv('%s/residential/curve567_55R.txt' % profiles_path, sep='\n', header=None)
-    curve56_00R = pd.read_csv('%s/residential/curve56_00R.txt' % profiles_path, sep='\n', header=None)
-    curve582_00R = pd.read_csv('%s/residential/curve582_00R.txt' % profiles_path, sep='\n', header=None)
-    curve58_00R = pd.read_csv('%s/residential/curve58_00R.txt' % profiles_path, sep='\n', header=None)
-    curve597_00R = pd.read_csv('%s/residential/curve597_00R.txt' % profiles_path, sep='\n', header=None)
-    curve5_00R = pd.read_csv('%s/residential/curve5_00R.txt' % profiles_path, sep='\n', header=None)
-    curve610_00R = pd.read_csv('%s/residential/curve610_00R.txt' % profiles_path, sep='\n', header=None)
-    curve61_00R = pd.read_csv('%s/residential/curve61_00R.txt' % profiles_path, sep='\n', header=None)
-    curve625_00R = pd.read_csv('%s/residential/curve625_00R.txt' % profiles_path, sep='\n', header=None)
-    curve63_00R = pd.read_csv('%s/residential/curve63_00R.txt' % profiles_path, sep='\n', header=None)
-    curve641_00R = pd.read_csv('%s/residential/curve641_00R.txt' % profiles_path, sep='\n', header=None)
-    curve658_00R = pd.read_csv('%s/residential/curve658_00R.txt' % profiles_path, sep='\n', header=None)
-    curve66_00R = pd.read_csv('%s/residential/curve66_00R.txt' % profiles_path, sep='\n', header=None)
-    curve677_00R = pd.read_csv('%s/residential/curve677_00R.txt' % profiles_path, sep='\n', header=None)
-    curve692_00R = pd.read_csv('%s/residential/curve692_00R.txt' % profiles_path, sep='\n', header=None)
-    curve69_00R = pd.read_csv('%s/residential/curve69_00R.txt' % profiles_path, sep='\n', header=None)
-    curve6_00R = pd.read_csv('%s/residential/curve6_00R.txt' % profiles_path, sep='\n', header=None)
-    curve71_00R = pd.read_csv('%s/residential/curve71_00R.txt' % profiles_path, sep='\n', header=None)
-    curve721_00R = pd.read_csv('%s/residential/curve721_00R.txt' % profiles_path, sep='\n', header=None)
-    curve737_00R = pd.read_csv('%s/residential/curve737_00R.txt' % profiles_path, sep='\n', header=None)
-    curve73_00R = pd.read_csv('%s/residential/curve73_00R.txt' % profiles_path, sep='\n', header=None)
-    curve760_00R = pd.read_csv('%s/residential/curve760_00R.txt' % profiles_path, sep='\n', header=None)
-    curve76_00R = pd.read_csv('%s/residential/curve76_00R.txt' % profiles_path, sep='\n', header=None)
-    curve778_00R = pd.read_csv('%s/residential/curve778_00R.txt' % profiles_path, sep='\n', header=None)
-    curve7911_00R = pd.read_csv('%s/residential/curve7911_00R.txt' % profiles_path, sep='\n', header=None)
-    curve796_04R = pd.read_csv('%s/residential/curve796_04R.txt' % profiles_path, sep='\n', header=None)
-    curve79_00R = pd.read_csv('%s/residential/curve79_00R.txt' % profiles_path, sep='\n', header=None)
-    curve7_00R = pd.read_csv('%s/residential/curve7_00R.txt' % profiles_path, sep='\n', header=None)
-    curve81_00R = pd.read_csv('%s/residential/curve81_00R.txt' % profiles_path, sep='\n', header=None)
-    curve820_00R = pd.read_csv('%s/residential/curve820_00R.txt' % profiles_path, sep='\n', header=None)
-    curve83_00R = pd.read_csv('%s/residential/curve83_00R.txt' % profiles_path, sep='\n', header=None)
-    curve841_00R = pd.read_csv('%s/residential/curve841_00R.txt' % profiles_path, sep='\n', header=None)
-    curve86_00R = pd.read_csv('%s/residential/curve86_00R.txt' % profiles_path, sep='\n', header=None)
-    curve870_00R = pd.read_csv('%s/residential/curve870_00R.txt' % profiles_path, sep='\n', header=None)
-    curve888_00R = pd.read_csv('%s/residential/curve888_00R.txt' % profiles_path, sep='\n', header=None)
-    curve89_00R = pd.read_csv('%s/residential/curve89_00R.txt' % profiles_path, sep='\n', header=None)
-    curve8_00R = pd.read_csv('%s/residential/curve8_00R.txt' % profiles_path, sep='\n', header=None)
-    curve913_00R = pd.read_csv('%s/residential/curve913_00R.txt' % profiles_path, sep='\n', header=None)
-    curve91_00R = pd.read_csv('%s/residential/curve91_00R.txt' % profiles_path, sep='\n', header=None)
-    curve934_00R = pd.read_csv('%s/residential/curve934_00R.txt' % profiles_path, sep='\n', header=None)
-    curve93_00R = pd.read_csv('%s/residential/curve93_00R.txt' % profiles_path, sep='\n', header=None)
-    curve95_00R = pd.read_csv('%s/residential/curve95_00R.txt' % profiles_path, sep='\n', header=None)
-    curve968_00R = pd.read_csv('%s/residential/curve968_00R.txt' % profiles_path, sep='\n', header=None)
-    curve98_00R = pd.read_csv('%s/residential/curve98_00R.txt' % profiles_path, sep='\n', header=None)
+    curve0_00R = pd.read_csv('%s/residential/curve0_00R.txt' % profiles_path,   header=None)
+    curve1003_00R = pd.read_csv('%s/residential/curve1003_00R.txt' % profiles_path,   header=None)
+    curve1032_00R = pd.read_csv('%s/residential/curve1032_00R.txt' % profiles_path,   header=None)
+    curve103_00R = pd.read_csv('%s/residential/curve103_00R.txt' % profiles_path,   header=None)
+    curve1064_00R = pd.read_csv('%s/residential/curve1064_00R.txt' % profiles_path,   header=None)
+    curve107_00R = pd.read_csv('%s/residential/curve107_00R.txt' % profiles_path,   header=None)
+    curve1094_00R = pd.read_csv('%s/residential/curve1094_00R.txt' % profiles_path,   header=None)
+    curve10_00R = pd.read_csv('%s/residential/curve10_00R.txt' % profiles_path,   header=None)
+    curve112_00R = pd.read_csv('%s/residential/curve112_00R.txt' % profiles_path,   header=None)
+    curve1138_00R = pd.read_csv('%s/residential/curve1138_00R.txt' % profiles_path,   header=None)
+    curve115_00R = pd.read_csv('%s/residential/curve115_00R.txt' % profiles_path,   header=None)
+    curve1180_00R = pd.read_csv('%s/residential/curve1180_00R.txt' % profiles_path,   header=None)
+    curve118_00R = pd.read_csv('%s/residential/curve118_00R.txt' % profiles_path,   header=None)
+    curve11_00R = pd.read_csv('%s/residential/curve11_00R.txt' % profiles_path,   header=None)
+    curve121_00R = pd.read_csv('%s/residential/curve121_00R.txt' % profiles_path,   header=None)
+    curve1229_00R = pd.read_csv('%s/residential/curve1229_00R.txt' % profiles_path,   header=None)
+    curve124_00R = pd.read_csv('%s/residential/curve124_00R.txt' % profiles_path,   header=None)
+    curve1272_00R = pd.read_csv('%s/residential/curve1272_00R.txt' % profiles_path,   header=None)
+    curve127_00R = pd.read_csv('%s/residential/curve127_00R.txt' % profiles_path,   header=None)
+    curve12_00R = pd.read_csv('%s/residential/curve12_00R.txt' % profiles_path,   header=None)
+    curve132_00R = pd.read_csv('%s/residential/curve132_00R.txt' % profiles_path,   header=None)
+    curve1344_00R = pd.read_csv('%s/residential/curve1344_00R.txt' % profiles_path,   header=None)
+    curve136_00R = pd.read_csv('%s/residential/curve136_00R.txt' % profiles_path,   header=None)
+    curve1380_00R = pd.read_csv('%s/residential/curve1380_00R.txt' % profiles_path,   header=None)
+    curve139_43R = pd.read_csv('%s/residential/curve139_43R.txt' % profiles_path,   header=None)
+    curve13_00R = pd.read_csv('%s/residential/curve13_00R.txt' % profiles_path,   header=None)
+    curve1416_00R = pd.read_csv('%s/residential/curve1416_00R.txt' % profiles_path,   header=None)
+    curve143_00R = pd.read_csv('%s/residential/curve143_00R.txt' % profiles_path,   header=None)
+    curve1448_00R = pd.read_csv('%s/residential/curve1448_00R.txt' % profiles_path,   header=None)
+    curve146_00R = pd.read_csv('%s/residential/curve146_00R.txt' % profiles_path,   header=None)
+    curve14_00R = pd.read_csv('%s/residential/curve14_00R.txt' % profiles_path,   header=None)
+    curve150_00R = pd.read_csv('%s/residential/curve150_00R.txt' % profiles_path,   header=None)
+    curve1544_00R = pd.read_csv('%s/residential/curve1544_00R.txt' % profiles_path,   header=None)
+    curve154_00R = pd.read_csv('%s/residential/curve154_00R.txt' % profiles_path,   header=None)
+    curve158_00R = pd.read_csv('%s/residential/curve158_00R.txt' % profiles_path,   header=None)
+    curve162_00R = pd.read_csv('%s/residential/curve162_00R.txt' % profiles_path,   header=None)
+    curve167_00R = pd.read_csv('%s/residential/curve167_00R.txt' % profiles_path,   header=None)
+    curve1688_00R = pd.read_csv('%s/residential/curve1688_00R.txt' % profiles_path,   header=None)
+    curve16_00R = pd.read_csv('%s/residential/curve16_00R.txt' % profiles_path,   header=None)
+    curve172_00R = pd.read_csv('%s/residential/curve172_00R.txt' % profiles_path,   header=None)
+    curve177_00R = pd.read_csv('%s/residential/curve177_00R.txt' % profiles_path,   header=None)
+    curve180_93R = pd.read_csv('%s/residential/curve180_93R.txt' % profiles_path,   header=None)
+    curve1840_00R = pd.read_csv('%s/residential/curve1840_00R.txt' % profiles_path,   header=None)
+    curve188_00R = pd.read_csv('%s/residential/curve188_00R.txt' % profiles_path,   header=None)
+    curve18_00R = pd.read_csv('%s/residential/curve18_00R.txt' % profiles_path,   header=None)
+    curve1912_00R = pd.read_csv('%s/residential/curve1912_00R.txt' % profiles_path,   header=None)
+    curve194_00R = pd.read_csv('%s/residential/curve194_00R.txt' % profiles_path,   header=None)
+    curve198_33R = pd.read_csv('%s/residential/curve198_33R.txt' % profiles_path,   header=None)
+    curve19_00R = pd.read_csv('%s/residential/curve19_00R.txt' % profiles_path,   header=None)
+    curve1_00R = pd.read_csv('%s/residential/curve1_00R.txt' % profiles_path,   header=None)
+    curve2037_00R = pd.read_csv('%s/residential/curve2037_00R.txt' % profiles_path,   header=None)
+    curve207_00R = pd.read_csv('%s/residential/curve207_00R.txt' % profiles_path,   header=None)
+    curve20_00R = pd.read_csv('%s/residential/curve20_00R.txt' % profiles_path,   header=None)
+    curve211_74R = pd.read_csv('%s/residential/curve211_74R.txt' % profiles_path,   header=None)
+    curve215_30R = pd.read_csv('%s/residential/curve215_30R.txt' % profiles_path,   header=None)
+    curve217_83R = pd.read_csv('%s/residential/curve217_83R.txt' % profiles_path,   header=None)
+    curve2180_00R = pd.read_csv('%s/residential/curve2180_00R.txt' % profiles_path,   header=None)
+    curve219_48R = pd.read_csv('%s/residential/curve219_48R.txt' % profiles_path,   header=None)
+    curve225_00R = pd.read_csv('%s/residential/curve225_00R.txt' % profiles_path,   header=None)
+    curve22_00R = pd.read_csv('%s/residential/curve22_00R.txt' % profiles_path,   header=None)
+    curve230_00R = pd.read_csv('%s/residential/curve230_00R.txt' % profiles_path,   header=None)
+    curve2340_00R = pd.read_csv('%s/residential/curve2340_00R.txt' % profiles_path,   header=None)
+    curve235_80R = pd.read_csv('%s/residential/curve235_80R.txt' % profiles_path,   header=None)
+    curve2397_21R = pd.read_csv('%s/residential/curve2397_21R.txt' % profiles_path,   header=None)
+    curve23_00R = pd.read_csv('%s/residential/curve23_00R.txt' % profiles_path,   header=None)
+    curve242_00R = pd.read_csv('%s/residential/curve242_00R.txt' % profiles_path,   header=None)
+    curve248_00R = pd.read_csv('%s/residential/curve248_00R.txt' % profiles_path,   header=None)
+    curve24_00R = pd.read_csv('%s/residential/curve24_00R.txt' % profiles_path,   header=None)
+    curve2500_00R = pd.read_csv('%s/residential/curve2500_00R.txt' % profiles_path,   header=None)
+    curve255_96R = pd.read_csv('%s/residential/curve255_96R.txt' % profiles_path,   header=None)
+    curve25_00R = pd.read_csv('%s/residential/curve25_00R.txt' % profiles_path,   header=None)
+    curve264_00R = pd.read_csv('%s/residential/curve264_00R.txt' % profiles_path,   header=None)
+    curve269_45R = pd.read_csv('%s/residential/curve269_45R.txt' % profiles_path,   header=None)
+    curve275_00R = pd.read_csv('%s/residential/curve275_00R.txt' % profiles_path,   header=None)
+    curve27_00R = pd.read_csv('%s/residential/curve27_00R.txt' % profiles_path,   header=None)
+    curve2816_00R = pd.read_csv('%s/residential/curve2816_00R.txt' % profiles_path,   header=None)
+    curve283_00R = pd.read_csv('%s/residential/curve283_00R.txt' % profiles_path,   header=None)
+    curve28_00R = pd.read_csv('%s/residential/curve28_00R.txt' % profiles_path,   header=None)
+    curve2919_00R = pd.read_csv('%s/residential/curve2919_00R.txt' % profiles_path,   header=None)
+    curve292_50R = pd.read_csv('%s/residential/curve292_50R.txt' % profiles_path,   header=None)
+    curve299_22R = pd.read_csv('%s/residential/curve299_22R.txt' % profiles_path,   header=None)
+    curve29_00R = pd.read_csv('%s/residential/curve29_00R.txt' % profiles_path,   header=None)
+    curve2_00R = pd.read_csv('%s/residential/curve2_00R.txt' % profiles_path,   header=None)
+    curve301_77R = pd.read_csv('%s/residential/curve301_77R.txt' % profiles_path,   header=None)
+    curve3033_00R = pd.read_csv('%s/residential/curve3033_00R.txt' % profiles_path,   header=None)
+    curve304_21R = pd.read_csv('%s/residential/curve304_21R.txt' % profiles_path,   header=None)
+    curve30_00R = pd.read_csv('%s/residential/curve30_00R.txt' % profiles_path,   header=None)
+    curve313_00R = pd.read_csv('%s/residential/curve313_00R.txt' % profiles_path,   header=None)
+    curve31_00R = pd.read_csv('%s/residential/curve31_00R.txt' % profiles_path,   header=None)
+    curve325_00R = pd.read_csv('%s/residential/curve325_00R.txt' % profiles_path,   header=None)
+    curve32_00R = pd.read_csv('%s/residential/curve32_00R.txt' % profiles_path,   header=None)
+    curve332_00R = pd.read_csv('%s/residential/curve332_00R.txt' % profiles_path,   header=None)
+    curve3332_00R = pd.read_csv('%s/residential/curve3332_00R.txt' % profiles_path,   header=None)
+    curve339_00R = pd.read_csv('%s/residential/curve339_00R.txt' % profiles_path,   header=None)
+    curve33_00R = pd.read_csv('%s/residential/curve33_00R.txt' % profiles_path,   header=None)
+    curve346_00R = pd.read_csv('%s/residential/curve346_00R.txt' % profiles_path,   header=None)
+    curve34_00R = pd.read_csv('%s/residential/curve34_00R.txt' % profiles_path,   header=None)
+    curve353_33R = pd.read_csv('%s/residential/curve353_33R.txt' % profiles_path,   header=None)
+    curve35_00R = pd.read_csv('%s/residential/curve35_00R.txt' % profiles_path,   header=None)
+    curve361_00R = pd.read_csv('%s/residential/curve361_00R.txt' % profiles_path,   header=None)
+    curve3652_00R = pd.read_csv('%s/residential/curve3652_00R.txt' % profiles_path,   header=None)
+    curve369_00R = pd.read_csv('%s/residential/curve369_00R.txt' % profiles_path,   header=None)
+    curve36_00R = pd.read_csv('%s/residential/curve36_00R.txt' % profiles_path,   header=None)
+    curve37_00R = pd.read_csv('%s/residential/curve37_00R.txt' % profiles_path,   header=None)
+    curve380_00R = pd.read_csv('%s/residential/curve380_00R.txt' % profiles_path,   header=None)
+    curve38_00R = pd.read_csv('%s/residential/curve38_00R.txt' % profiles_path,   header=None)
+    curve390_02R = pd.read_csv('%s/residential/curve390_02R.txt' % profiles_path,   header=None)
+    curve39_00R = pd.read_csv('%s/residential/curve39_00R.txt' % profiles_path,   header=None)
+    curve3_00R = pd.read_csv('%s/residential/curve3_00R.txt' % profiles_path,   header=None)
+    curve401_82R = pd.read_csv('%s/residential/curve401_82R.txt' % profiles_path,   header=None)
+    curve40_00R = pd.read_csv('%s/residential/curve40_00R.txt' % profiles_path,   header=None)
+    curve413_00R = pd.read_csv('%s/residential/curve413_00R.txt' % profiles_path,   header=None)
+    curve41_00R = pd.read_csv('%s/residential/curve41_00R.txt' % profiles_path,   header=None)
+    curve423_36R = pd.read_csv('%s/residential/curve423_36R.txt' % profiles_path,   header=None)
+    curve434_00R = pd.read_csv('%s/residential/curve434_00R.txt' % profiles_path,   header=None)
+    curve43_00R = pd.read_csv('%s/residential/curve43_00R.txt' % profiles_path,   header=None)
+    curve445_44R = pd.read_csv('%s/residential/curve445_44R.txt' % profiles_path,   header=None)
+    curve459_00R = pd.read_csv('%s/residential/curve459_00R.txt' % profiles_path,   header=None)
+    curve45_00R = pd.read_csv('%s/residential/curve45_00R.txt' % profiles_path,   header=None)
+    curve46_00R = pd.read_csv('%s/residential/curve46_00R.txt' % profiles_path,   header=None)
+    curve470_34R = pd.read_csv('%s/residential/curve470_34R.txt' % profiles_path,   header=None)
+    curve47_00R = pd.read_csv('%s/residential/curve47_00R.txt' % profiles_path,   header=None)
+    curve481_00R = pd.read_csv('%s/residential/curve481_00R.txt' % profiles_path,   header=None)
+    curve48_00R = pd.read_csv('%s/residential/curve48_00R.txt' % profiles_path,   header=None)
+    curve495_60R = pd.read_csv('%s/residential/curve495_60R.txt' % profiles_path,   header=None)
+    curve49_00R = pd.read_csv('%s/residential/curve49_00R.txt' % profiles_path,   header=None)
+    curve4_00R = pd.read_csv('%s/residential/curve4_00R.txt' % profiles_path,   header=None)
+    curve506_00R = pd.read_csv('%s/residential/curve506_00R.txt' % profiles_path,   header=None)
+    curve519_00R = pd.read_csv('%s/residential/curve519_00R.txt' % profiles_path,   header=None)
+    curve51_00R = pd.read_csv('%s/residential/curve51_00R.txt' % profiles_path,   header=None)
+    curve530_25R = pd.read_csv('%s/residential/curve530_25R.txt' % profiles_path,   header=None)
+    curve53_00R = pd.read_csv('%s/residential/curve53_00R.txt' % profiles_path,   header=None)
+    curve544_45R = pd.read_csv('%s/residential/curve544_45R.txt' % profiles_path,   header=None)
+    curve556_00R = pd.read_csv('%s/residential/curve556_00R.txt' % profiles_path,   header=None)
+    curve5572_00R = pd.read_csv('%s/residential/curve5572_00R.txt' % profiles_path,   header=None)
+    curve567_55R = pd.read_csv('%s/residential/curve567_55R.txt' % profiles_path,   header=None)
+    curve56_00R = pd.read_csv('%s/residential/curve56_00R.txt' % profiles_path,   header=None)
+    curve582_00R = pd.read_csv('%s/residential/curve582_00R.txt' % profiles_path,   header=None)
+    curve58_00R = pd.read_csv('%s/residential/curve58_00R.txt' % profiles_path,   header=None)
+    curve597_00R = pd.read_csv('%s/residential/curve597_00R.txt' % profiles_path,   header=None)
+    curve5_00R = pd.read_csv('%s/residential/curve5_00R.txt' % profiles_path,   header=None)
+    curve610_00R = pd.read_csv('%s/residential/curve610_00R.txt' % profiles_path,   header=None)
+    curve61_00R = pd.read_csv('%s/residential/curve61_00R.txt' % profiles_path,   header=None)
+    curve625_00R = pd.read_csv('%s/residential/curve625_00R.txt' % profiles_path,   header=None)
+    curve63_00R = pd.read_csv('%s/residential/curve63_00R.txt' % profiles_path,   header=None)
+    curve641_00R = pd.read_csv('%s/residential/curve641_00R.txt' % profiles_path,   header=None)
+    curve658_00R = pd.read_csv('%s/residential/curve658_00R.txt' % profiles_path,   header=None)
+    curve66_00R = pd.read_csv('%s/residential/curve66_00R.txt' % profiles_path,   header=None)
+    curve677_00R = pd.read_csv('%s/residential/curve677_00R.txt' % profiles_path,   header=None)
+    curve692_00R = pd.read_csv('%s/residential/curve692_00R.txt' % profiles_path,   header=None)
+    curve69_00R = pd.read_csv('%s/residential/curve69_00R.txt' % profiles_path,   header=None)
+    curve6_00R = pd.read_csv('%s/residential/curve6_00R.txt' % profiles_path,   header=None)
+    curve71_00R = pd.read_csv('%s/residential/curve71_00R.txt' % profiles_path,   header=None)
+    curve721_00R = pd.read_csv('%s/residential/curve721_00R.txt' % profiles_path,   header=None)
+    curve737_00R = pd.read_csv('%s/residential/curve737_00R.txt' % profiles_path,   header=None)
+    curve73_00R = pd.read_csv('%s/residential/curve73_00R.txt' % profiles_path,   header=None)
+    curve760_00R = pd.read_csv('%s/residential/curve760_00R.txt' % profiles_path,   header=None)
+    curve76_00R = pd.read_csv('%s/residential/curve76_00R.txt' % profiles_path,   header=None)
+    curve778_00R = pd.read_csv('%s/residential/curve778_00R.txt' % profiles_path,   header=None)
+    curve7911_00R = pd.read_csv('%s/residential/curve7911_00R.txt' % profiles_path,   header=None)
+    curve796_04R = pd.read_csv('%s/residential/curve796_04R.txt' % profiles_path,   header=None)
+    curve79_00R = pd.read_csv('%s/residential/curve79_00R.txt' % profiles_path,   header=None)
+    curve7_00R = pd.read_csv('%s/residential/curve7_00R.txt' % profiles_path,   header=None)
+    curve81_00R = pd.read_csv('%s/residential/curve81_00R.txt' % profiles_path,   header=None)
+    curve820_00R = pd.read_csv('%s/residential/curve820_00R.txt' % profiles_path,   header=None)
+    curve83_00R = pd.read_csv('%s/residential/curve83_00R.txt' % profiles_path,   header=None)
+    curve841_00R = pd.read_csv('%s/residential/curve841_00R.txt' % profiles_path,   header=None)
+    curve86_00R = pd.read_csv('%s/residential/curve86_00R.txt' % profiles_path,   header=None)
+    curve870_00R = pd.read_csv('%s/residential/curve870_00R.txt' % profiles_path,   header=None)
+    curve888_00R = pd.read_csv('%s/residential/curve888_00R.txt' % profiles_path,   header=None)
+    curve89_00R = pd.read_csv('%s/residential/curve89_00R.txt' % profiles_path,   header=None)
+    curve8_00R = pd.read_csv('%s/residential/curve8_00R.txt' % profiles_path,   header=None)
+    curve913_00R = pd.read_csv('%s/residential/curve913_00R.txt' % profiles_path,   header=None)
+    curve91_00R = pd.read_csv('%s/residential/curve91_00R.txt' % profiles_path,   header=None)
+    curve934_00R = pd.read_csv('%s/residential/curve934_00R.txt' % profiles_path,   header=None)
+    curve93_00R = pd.read_csv('%s/residential/curve93_00R.txt' % profiles_path,   header=None)
+    curve95_00R = pd.read_csv('%s/residential/curve95_00R.txt' % profiles_path,   header=None)
+    curve968_00R = pd.read_csv('%s/residential/curve968_00R.txt' % profiles_path,   header=None)
+    curve98_00R = pd.read_csv('%s/residential/curve98_00R.txt' % profiles_path,   header=None)
     profiles_dict = {
         'BatteryProfile': -BatteryProfile,
         'PVprofile': PVprofile,
@@ -529,27 +529,27 @@ def profile_curves_update(hour,agt_results):
     for i in range(0,n_agents):
         profile_name = agents_df['PROFILE'][i]
         if profile_name.endswith('R'):  # residential loadshapes
-            profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/\residential"
+            profiles_path = r"data/profiles_edited/\residential"
             profiles_dict[profile_name][0][hour] = abs(agt_results['P_n'][i])/agents_df['BASE_KW'][i]
             df = pd.DataFrame(profiles_dict[profile_name])
             df.to_csv('%s\%s.csv' % (profiles_path,profile_name), sep=',', index=False, header=False)
         if profile_name.endswith('I'):  # industrial loadshapes
-            profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/\industrial"
+            profiles_path = r"data/profiles_edited/\industrial"
             profiles_dict[profile_name][0][hour] = abs(agt_results['P_n'][i])/agents_df['BASE_KW'][i]
             df = pd.DataFrame(profiles_dict[profile_name])
             df.to_csv('%s\%s.csv' % (profiles_path,profile_name), sep=',', index=False, header=False)
         if profile_name.endswith('C'):  # commercial loadshapes
-            profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/\commercial"
+            profiles_path = r"data/profiles_edited/\commercial"
             profiles_dict[profile_name][0][hour] = abs(agt_results['P_n'][i])/agents_df['BASE_KW'][i]
             df = pd.DataFrame(profiles_dict[profile_name])
             df.to_csv('%s\%s.csv' % (profiles_path,profile_name), sep=',', index=False, header=False)
         if profile_name.startswith('PV'):  # photovoltaic loadshapes
-            profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/\DG"
+            profiles_path = r"data/profiles_edited/\DG"
             profiles_dict[profile_name][0][hour] = abs(agt_results['P_n'][i])/agents_df['BASE_KW'][i]
             df = pd.DataFrame(profiles_dict[profile_name])
             df.to_csv('%s\%s.csv' % (profiles_path,profile_name), sep=',', index=False, header=False)
         if profile_name.startswith('Battery'):  # storage loadshapes
-            profiles_path = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/profiles_edited/\storage"
+            profiles_path = r"data/profiles_edited/\storage"
             # profiles_dict[profile_name][0][hour] = - agt_results['S_n'][i]/bat_capacity[j]
             profiles_dict[profile_name][0][hour] = - agt_results['S_n'][i]/agents_df['BASE_KW'][i]
             j = j+1
@@ -622,10 +622,10 @@ def costs_info(agents_df):
     imp_cost = []
     exp_cost = []
 
-    gen_costs = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/PvList_Cost.csv", delimiter=',')
-    load_costs = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/LoadsList_Cost.csv", delimiter=',')
-    mkt_costs = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/00_Market_price_hourly_brasil.csv", delimiter=',')
-    bat_costs = pd.read_csv(r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/BatteryList_Cost.csv", delimiter=',')
+    gen_costs = pd.read_csv(r"data/dss_data/PvList_Cost.csv", delimiter=',')
+    load_costs = pd.read_csv(r"data/dss_data/LoadsList_Cost.csv", delimiter=',')
+    mkt_costs = pd.read_csv(r"data/dss_data/00_Market_price_hourly_brasil.csv", delimiter=',')
+    bat_costs = pd.read_csv(r"data/dss_data/BatteryList_Cost.csv", delimiter=',')
 
     for i in range(0,len(agent_number)):
         if agent_type[i]=='CONSUMER':
@@ -1083,9 +1083,9 @@ def opendss_powerflow():
 
     # ...::: IMPORTING NETWORK DATA :::...
     if battery_size==0:
-        dss_file = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/MASTER_hourly_no_storage.dss"
+        dss_file = r"data/MASTER_hourly_no_storage.dss"
     if battery_size!=0:
-        dss_file = r"~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/MASTER_hourly.dss"
+        dss_file = r"data/MASTER_hourly.dss"
         
     dss.text("compile {}".format(dss_file))
     
@@ -1264,7 +1264,7 @@ def pandapower_plot():
 
     collections = [hvbus_collection,mvbus_collection,lvbus_collection,mvlines_collection,lvlines_collection,load_collection,gen_collection,prosumer_collection]
     pp.plotting.draw_collections(collections=collections)
-    # plt.savefig(r'~/Documents/UFJF/Mestrado/DISSERTACAO/trabalho/DSS/plot_data/teste.svg')
+    # plt.savefig(r'data/dss_data/teste.svg')
     plt.show()
 
     # Plotting Network

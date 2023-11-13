@@ -7,7 +7,7 @@ class DataAquisition:
         self.path = path
         self.data = {}
     def findData(self):
-        files = glob.glob(f'{self.path}/*.csv')
+        files = glob.glob(f'{self.path}/dss_data/*.csv')
         for file in tqdm(files, total=len(files)):
             name = file.split('\\')[-1].replace('.csv', '')
             param = pd.read_csv(file, delimiter=',')
@@ -61,12 +61,93 @@ class DataAquisition:
             'COMMUNITY_LOCATION': community_location, 'PROFILE': agent_profile
         })
 
+    def createProfiles(self):
+        self.profiles = []
+        for profile in self.args.profiles:
+            files = glob.glob(f'{self.path}/profiles_edited/{profile}/*.txt')
+            for file in files:
+                name = file.split('\\')[-1].replace('.txt', '')
+                self.profiles.append({'profile': profile, 'curve': name, 'data': pd.read_csv(file, header=None)})
+
+    @staticmethod
+    def consumerProducerInfo(data: pd.DataFrame, **kwargs):
+        index_val = data[data['NAME'] == kwargs['name']].index.values
+        a_doll_kw2 = data['A_[R$/KW^2]'][index_val[0]]
+        b_doll_kw = data['B_[R$/KW]'][index_val[0]]
+        cost_s = 0.0
+        inner_cost = 0.001
+        imp_cost = 0.0
+        exp_cost = 0.0
+        return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
+
+    @staticmethod
+    def batteryInfo(data: pd.DataFrame, **kwargs):
+        a_doll_kw2 = 0.0
+        b_doll_kw = 0.0
+        cost_s = data['COST_S'][kwargs['hour']]
+        inner_cost = 0.001
+        imp_cost = 0.0
+        exp_cost = 0.0
+        return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
+    @staticmethod
+    def extConsumerInfo(data: pd.DataFrame, **kwargs):
+        a_doll_kw2 = 0.0
+        b_doll_kw = 0.0
+        cost_s = 0.0
+        inner_cost = 0.001
+        imp_cost = 0.0
+        exp_cost = data['EXPORT_PRICE(R$/MWh)'][kwargs['hour']]/1000
+        return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
+
+    @staticmethod
+    def extConsumerInfo(data: pd.DataFrame, **kwargs):
+
+        a_doll_kw2 = 0.0
+        b_doll_kw = 0.0
+        cost_s = 0.0
+        inner_cost = 0.001
+        imp_cost = 0.0
+        exp_cost = data['EXPORT_PRICE(R$/MWh)'][kwargs['hour']]/1000
+        return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
+
+    @staticmethod
+    def extProducerInfo(data: pd.DataFrame, **kwargs):
+        a_doll_kw2 = 0.0
+        b_doll_kw = 0.0
+        cost_s = 0.0
+        inner_cost = 0.001
+        imp_cost = data['IMPORT_PRICE(R$/MWh)'][kwargs['hour']]/1000
+        exp_cost = 0.0
+        return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
+
+    def costInfo(self):
+        costs_data = []
+        fn_dict = {
+            'CONSUMER': (self.consumerProducerInfo, self.data['LoadsList_Cost']),
+            'PRODUCER': (self.consumerProducerInfo, self.data['PvList_Cost']),
+            'BATTERY': self.batteryInfo(self.data['BatteryList_Cost'], hour=0),
+            'EXT_CONSUMER': self.extConsumerInfo(self.data['00_Market_price_hourly_brasil'], hour=0),
+            'EXT_PRODUCER': self.extProducerInfo(self.data['00_Market_price_hourly_brasil'], hour=0),
+        }
+        for i, row in self.agents_df.iterrows():
+            if type(fn_dict[row['TYPE']]) is tuple and len(fn_dict[row['TYPE']]) == 2:
+
+                fn, data = fn_dict[row['TYPE']]
+                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn(data, name=row['NAME'])
+            else:
+                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn_dict[row['TYPE']]
+            costs_data.append({'AGENT': i, 'NAME': row['NAME'], 'TYPE': row['TYPE'], 'A_[R$/KW^2]': a_doll_kw2,
+                  'B_[R$/KW]': b_doll_kw, 'COST_S': cost_s, 'INNER_COST': inner_cost, 'IMP_COST': imp_cost, 'EXP_COST': exp_cost})
+
+        self.cost_df = pd.DataFrame(costs_data, index=None)
 class PreProcessingData(DataAquisition):
     def __init__(self, args):
         super(PreProcessingData, self).__init__(args=args, path=args.path)
         self.findData()
         self.createParams()
         self.createDefaultDf()
+        self.createProfiles()
+        self.costInfo()
 
         community_buses = list(self.agents_df.head(self.args.n_agents - 2)['BUS'].unique())
         community_lines = []
@@ -81,6 +162,3 @@ class PreProcessingData(DataAquisition):
         community_lines = list(dict.fromkeys(community_lines))
         print(community_lines)
 
-class OptimizationData(DataAquisition):
-    def __init__(self, args):
-        super(OptimizationData, self).__init__(args=args, path=args.path)
