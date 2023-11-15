@@ -41,8 +41,11 @@ class Optmizer(PreProcessingData):
     def PBoundery(self, model, i):
         #consumer
         agent_data = self.agents_data[i]
-        if agent_data['type'] == 'CONSUMER' or agent_data['type'] == 'PRODUCER':
+        if agent_data['type'] == 'CONSUMER':
             return (0.7 * agent_data['kw_base'] * self.profiles[agent_data['profile']][self.hour], 1.3 * agent_data['kw_base'] * self.profiles[agent_data['profile']][self.hour])
+        elif agent_data['type'] == 'PRODUCER':
+            return (-1.3 * agent_data['kw_base'] * self.profiles[agent_data['profile']][self.hour],
+                    -0.7 * agent_data['kw_base'] * self.profiles[agent_data['profile']][self.hour])
         elif agent_data['type'] == 'BATERRY':
             return (0, 0)
         elif agent_data['type'] == 'EXT_CONSUMER':
@@ -118,26 +121,26 @@ class Optmizer(PreProcessingData):
                 self.model.Inequality_Cons.add(self.model.S_n[_id] * bat_dischargeeff[i] >= - bat_capacity[i] * (self.model.Soc_n[_id] - bat_socmin[i]))  # discharging amount constraints of each battery
         ## 2.3 - Upper and lower boundaries constraints
         #TODO{colocar como funções de bounderies na Var}
-        for i, row in self.agents_df.iterrows():
-            if self.agents_df['type'][i] == 'CONSUMER':  ## consumer
-                self.model.Inequality_Cons.add(self.model.P_n[i] <= 1.3*row['kw_base']*self.profiles[row['profile']][hour])  # upper boundary constraint
-                self.model.Inequality_Cons.add(self.model.P_n[i] >= 0.7*row['kw_base']*self.profiles[row['profile']][hour])  # lower boundary constraint
-                self.model.Inequality_Cons.add(self.model.Q_n[i] <= 0)
-            if self.agents_df['type'][i] == 'PRODUCER':  ## producer
-                self.model.Inequality_Cons.add(self.model.P_n[i] <= -0.7*row['kw_base']*self.profiles[row['profile']][hour])  # upper boundary constraint
-                self.model.Inequality_Cons.add(self.model.P_n[i] >= -1.3*row['kw_base']*self.profiles[row['profile']][hour])  # lower boundary constraint
-                self.model.Inequality_Cons.add(self.model.Q_n[i] >= 0)
-            if self.agents_df['TYPE'][i]=='BATTERY':
-                self.model.Inequality_Cons.add(self.model.P_n[i] <= 0)  # upper boundary constraint
-                self.model.Inequality_Cons.add(self.model.P_n[i] >= 0)  # lower boundary constraint
-            if self.agents_df['type'][i]=='EXT_CONSUMER':
-                self.model.Inequality_Cons.add(self.model.P_n[i] <= row['kw_base'])  # upper boundary constraint
-                self.model.Inequality_Cons.add(self.model.P_n[i] >= 0)  # lower boundary constraint
-                self.model.Inequality_Cons.add(self.model.Q_n[i] <= 0)
-            if self.agents_df['type'][i]=='EXT_PRODUCER':
-                self.model.Inequality_Cons.add(self.model.P_n[i] <= 0)  # upper boundary constraint
-                self.model.Inequality_Cons.add(self.model.P_n[i] >= -row['kw_base'])  # lower boundary constraint
-                self.model.Inequality_Cons.add(self.model.Q_n[i] >= 0)
+        # for i, row in self.agents_df.iterrows():
+        #     if self.agents_df['type'][i] == 'CONSUMER':  ## consumer
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] <= 1.3*row['kw_base']*self.profiles[row['profile']][hour])  # upper boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] >= 0.7*row['kw_base']*self.profiles[row['profile']][hour])  # lower boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.Q_n[i] <= 0)
+        #     if self.agents_df['type'][i] == 'PRODUCER':  ## producer
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] <= -0.7*row['kw_base']*self.profiles[row['profile']][hour])  # upper boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] >= -1.3*row['kw_base']*self.profiles[row['profile']][hour])  # lower boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.Q_n[i] >= 0)
+        #     if self.agents_df['type'][i]=='BATTERY':
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] <= 0)  # upper boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] >= 0)  # lower boundary constraint
+        #     if self.agents_df['type'][i]=='EXT_CONSUMER':
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] <= row['kw_base'])  # upper boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] >= 0)  # lower boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.Q_n[i] <= 0)
+        #     if self.agents_df['type'][i]=='EXT_PRODUCER':
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] <= 0)  # upper boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.P_n[i] >= -row['kw_base'])  # lower boundary constraint
+        #         self.model.Inequality_Cons.add(self.model.Q_n[i] >= 0)
         ## 2.4 - QoS lower boundaries constraints
         # for j in range(0,n_communities-1):
         #     model.Equality_Cons.add(model.QoS[j] == qos_bound)
@@ -249,7 +252,8 @@ class Optmizer(PreProcessingData):
 
         if self.args.battery_size!=0:
             if (day == 0 and hour == 0):  ### DEFINES THE STARTING STATE OF CHARGE AS 0.5
-                idx = np.where(self.agents_df['type'][:] == 'BATTERY')[0]  # batteries locations -> batteries as agents
+                # batteries locations -> batteries as agents
+                idx = np.where(self.agents_df['type'][:] == 'BATTERY')[0]
                 j = 0
                 for i in range(0, self.args.n_agents):
                     if (i in idx):
@@ -304,14 +308,14 @@ class Optmizer(PreProcessingData):
         self.defineInequalityCons(day=day, hour=hour)
 
         self.results = self.opt.solve(self.model, tee=False)
-        print(f'Day: {day}', f'|Hour:{hour}', f'|Solver Status: {self.results.solver.status}', f'|Termination Condition: {self.results.solver.termination_condition}')
+        print(f'Day: {day}', f'|Hour:{hour}', f'|FOB: {value(self.model.obj)}', f'|Solver Status: {self.results.solver.status}', f'|Termination Condition: {self.results.solver.termination_condition}')
         return self.model, self.results, self.inner_community_balance, self.outer_community_balance
 
 
 class OptimizationData(PreProcessingData):
     def __init__(self, args):
         super(OptimizationData, self).__init__(args=args)
-        self.opt_logger = {}
+        self.opt_logger = [{hour: {} for hour in range(self.args.hour)}for day in range(self.args.day)]
         #(day, hour[hour])
         self.optimization_results = [{hour: {} for hour in range(self.args.hour)}for day in range(self.args.day)]  ## RESULTS DICTIONARY - MUST BE DECLARED BEFORE OPTIMIZATION LOOP
         # (agent, day ,hour[hour])
@@ -334,12 +338,16 @@ class OptimizationData(PreProcessingData):
                                optimization_results=self.optimization_results, agents_results=self.agents_results,
                                communities_results=self.communities_results)
                 self.model, self.results, self.inner_community_balance, self.outer_community_balance = opt.minimize(hour=hour, day=day, cost_df=self.cost_df)
-                self.opt_logger[day] = {'hour': hour, 'solver_status': self.results.solver.status,
-                                    'condition': self.results.solver.termination_condition, 'opt_model': self.model, 'results': self.results}
+                self.opt_logger[day][hour] = {'fob': value(self.model.obj), 'solver_status': self.results.solver.status,
+                                             'condition': self.results.solver.termination_condition,
+                                             'opt_model': self.model, 'results': self.results}
                 report = Report(n_communities=self.args.n_communities, agents_df=self.agents_df, day=day, hour=hour,
                                 battery_size=self.args.battery_size, n_agents=self.args.n_agents,
                                 agents_results=opt.agents_results, communities_results=opt.communities_results,
                                 optimization_results=opt.optimization_results)
+                report.set_report(model=self.model, results=self.results,
+                                  inner_community_balance=self.inner_community_balance,
+                                  outer_community_balance=self.outer_community_balance)
                 self.updateResults(agents_results=report.agents_results, communities_results=report.communities_results,
                                    optimization_results=report.optimization_results)
                 self.updateProfiles(hour=hour, agt_results=report.agt_results)

@@ -3,7 +3,8 @@ import pandas as pd
 from pyomo.environ import *
 from pandas import DataFrame
 class Report:
-    def __init__(self, n_communities, agents_df, day, hour, battery_size, n_agents, agents_results, communities_results, optimization_results):
+    def __init__(self, n_communities, agents_df, day, hour, battery_size, n_agents,
+                 agents_results, communities_results, optimization_results):
         self.n_communities = n_communities
         self.communities_results = communities_results
         self.optimization_results = optimization_results
@@ -25,31 +26,25 @@ class Report:
                 if model.dual[outer_community_balance[i]] >= outer_market_clearing:
                     outer_market_clearing = model.dual[outer_community_balance[i]]
             for i in range(0, len(inner_community_balance)):
-                if model.dual[inner_community_balance[i]] >= inner_market_clearing[int(self.agents_df['COMMUNITY_LOCATION'][i]) - 1]:
-                    inner_market_clearing[int(self.agents_df['COMMUNITY_LOCATION'][i]) - 1] = model.dual[inner_community_balance[i]]
+                if model.dual[inner_community_balance[i]] >= inner_market_clearing[int(self.agents_df['community_location'][i]) - 1]:
+                    inner_market_clearing[int(self.agents_df['community_location'][i]) - 1] = model.dual[inner_community_balance[i]]
             for i in range(0, len(qos)):
                 qos[i] = model.QoS[i].value
             self.optimization_results[self.day][self.hour] = {
-                'Objective': value(model.OBJ),
+                'Objective': value(model.obj),
                 'Outer Market Clearing': outer_market_clearing,
                 'Inner Markets Clearing': inner_market_clearing,
                 'QoS': qos
             }
-            Qexp = []
-            Qimp = []
-            community_range_set = []
-            for i in range(0, self.n_communities ** 2):
-                community_range_set.append(i)
-            for i in range(0, len(community_range_set)):
-                Qexp.append(model.Qexp_c[i].value)
-                Qimp.append(model.Qimp_c[i].value)
+            Qexp = [model.Qexp_c[exp_idx].value for exp_idx in model.Qexp_c]
+            Qimp = [model.Qimp_c[imp_idx].value for imp_idx in model.Qimp_c]
+
             Qexp = np.reshape(Qexp, (self.n_communities, self.n_communities))  ## separates the communities export trade results in a matrix
             Qimp = np.reshape(Qimp, (self.n_communities, self.n_communities))  ## separates the communities import trade results in a matrix
-            total_Qexp = []
-            total_Qimp = []
-            for i in range(0, self.n_communities):  ## separates the total community trade results in a list
-                total_Qexp.append(sum(Qexp[i][:]))
-                total_Qimp.append(sum(Qimp[i][:]))
+
+            ## separates the total community trade results in a list
+            total_Qexp = [sum(Qexp[i][:]) for i in range(0, self.n_communities)]
+            total_Qimp = [sum(Qimp[i][:]) for i in range(0, self.n_communities)]
             if self.battery_size == 0:
                 for agent in range(0, self.n_agents):  ## saves agent optimization results in dictionary
                     self.agents_results[agent][self.day][self.hour] = {
@@ -68,10 +63,10 @@ class Report:
                         'S': model.S_n[agent].value,
                         'Soc': model.Soc_n[agent].value
                     }
-            for community in range(1, self.n_communities + 1):  ## saves communities optimization results in dictionary
+            for community in range(self.n_communities):  ## saves communities optimization results in dictionary
                 self.communities_results[community][self.day][self.hour] = {
-                    'Qexp': total_Qexp[community - 1],
-                    'Qimp': total_Qimp[community - 1]
+                    'Qexp': total_Qexp[community],
+                    'Qimp': total_Qimp[community]
                 }
         elif (results.solver.termination_condition == TerminationCondition.infeasible):
             self.optimization_results[self.day][self.hour] = {
@@ -87,7 +82,7 @@ class Report:
                     'Alpha': 'nan',
                     'Beta': 'nan'
                 }
-            for community in range(1, self.n_communities + 1):  ## saves communities optimization results in dictionary
+            for community in range(0, self.n_communities):  ## saves communities optimization results in dictionary
                 self.communities_results[community][self.day][self.hour] = {
                     'Qexp': 'nan',
                     'Qimp': 'nan'
@@ -109,6 +104,7 @@ class Report:
                                             'Mkt_Clearing_Com2', 'Mkt_Clearing_Com3', 'Outer_Mkt_Clearing'])
 
         Agent, P_n, Q_n, Alpha_n, Beta_n, S_n, Soc_n = ([] for i in range(7))
+
         if self.battery_size == 0:
             for agent in range(0, self.n_agents):
                 Agent.append(agent)
@@ -133,7 +129,7 @@ class Report:
                                        columns=['Agent', 'P_n', 'Q_n', 'Alpha_n', 'Beta_n', 'S_n', 'Soc_n'])
 
         com, qexp, qimp = ([] for i in range(3))
-        for community in range(1, self.n_communities + 1):  ## saves communities optimization results in dictionary
+        for community in range(self.n_communities):  ## saves communities optimization results in dictionary
             com.append(community)
             qexp.append(self.communities_results[community][self.day][self.hour]['Qexp'])
             qimp.append(self.communities_results[community][self.day][self.hour]['Qimp'])

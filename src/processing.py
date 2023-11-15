@@ -82,7 +82,7 @@ class DataAquisition:
                 exportCSV(path=f'data/profiles_edited/industrial/{profile}.csv', data=data)
             elif profile.endswith('C'):
                 exportCSV(path=f'data/profiles_edited/commercial/{profile}.csv', data=data)
-            elif profile.endswith('PV'):
+            elif profile.startswith('PV'):
                 exportCSV(path=f'data/profiles_edited/DG/{profile}.csv', data=data)
             elif profile.startswith('Battery'):
                 exportCSV(path=f'data/profiles_edited/storage/{profile}.csv', data=data)
@@ -93,11 +93,12 @@ class DataAquisition:
     def updateProfiles(self, hour, agt_results):
         j = 0
         for i in range(0, self.args.n_agents):
-            profile_name = self.agents_df['PROFILE'][i]
-            self.profiles[profile_name][hour] = abs(agt_results['P_n'][i]) / self.agents_df['BASE_KW'][i]
+            profile_name = self.agents_df['profile'][i]
+            if profile_name != '':
+                self.profiles[profile_name][hour] = abs(agt_results['P_n'][i]) / self.agents_df['kw_base'][i]
             if profile_name.startswith('Battery'):  # storage loadshapes
                 # profiles_dict[profile_name][0][hour] = - agt_results['S_n'][i]/bat_capacity[j]
-                self.profiles[profile_name][hour] = - agt_results['S_n'][i] / self.agents_df['BASE_KW'][i]
+                self.profiles[profile_name][hour] = - agt_results['S_n'][i] / self.agents_df['kw_base'][i]
                 j = j + 1
         self.exportProfiles()
 
