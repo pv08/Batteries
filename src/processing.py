@@ -54,20 +54,53 @@ class DataAquisition:
         agent_basekw += [999999] * 2
         community_location += [self.args.n_communities] * 2
         agent_profile += [''] * 2
-
-        self.agents_df = pd.DataFrame({
-            'AGENT': agent_number, 'NAME': agent_name, 'TYPE': agent_type, 'BUS': agent_bus,
-            'BASE_KW': agent_basekw,
-            'COMMUNITY_LOCATION': community_location, 'PROFILE': agent_profile
-        })
+        self.agents_data = [
+            {'agent_id': id, 'name': name, 'type': type, 'bus': bus, 'kw_base': base, 'community_location': location, 'profile': profile}
+            for id, name, type, bus, base, location, profile in zip(agent_number, agent_name, agent_type, agent_bus, agent_basekw, community_location, agent_profile)
+        ]
+        self.agents_df = pd.DataFrame(self.agents_data)
 
     def createProfiles(self):
-        self.profiles = []
+        self.profiles = {}
         for profile in self.args.profiles:
             files = glob.glob(f'{self.path}/profiles_edited/{profile}/*.txt')
             for file in files:
                 name = file.split('\\')[-1].replace('.txt', '')
-                self.profiles.append({'profile': profile, 'curve': name, 'data': pd.read_csv(file, header=None)})
+                self.profiles[name] = list(pd.read_csv(file, header=None)[0].values)
+        self.profiles['BatteryProfile'] = [-x for x in self.profiles['BatteryProfile']]
+
+    def exportProfiles(self):
+        def exportCSV(**kwargs):
+            df = pd.DataFrame(kwargs['data'])
+            df.to_csv(kwargs['path'], sep=',', index=False, header=False)
+
+        print(f"[+] - Exporting profiles dictionary")
+        for profile, data in tqdm(zip(self.profiles.keys(), self.profiles.values()), total=len(self.profiles.values())):
+            if profile.endswith('R'):
+                exportCSV(path=f'data/profiles_edited/residential/{profile}.csv', data=data)
+            elif profile.endswith('I'):
+                exportCSV(path=f'data/profiles_edited/industrial/{profile}.csv', data=data)
+            elif profile.endswith('C'):
+                exportCSV(path=f'data/profiles_edited/commercial/{profile}.csv', data=data)
+            elif profile.endswith('PV'):
+                exportCSV(path=f'data/profiles_edited/DG/{profile}.csv', data=data)
+            elif profile.startswith('Battery'):
+                exportCSV(path=f'data/profiles_edited/storage/{profile}.csv', data=data)
+            else:
+                raise Exception(f'[!] - Profile not found while trying to export. Verify your profile dictionary!')
+
+
+    def updateProfiles(self, hour, agt_results):
+        j = 0
+        for i in range(0, self.args.n_agents):
+            profile_name = self.agents_df['PROFILE'][i]
+            self.profiles[profile_name][hour] = abs(agt_results['P_n'][i]) / self.agents_df['BASE_KW'][i]
+            if profile_name.startswith('Battery'):  # storage loadshapes
+                # profiles_dict[profile_name][0][hour] = - agt_results['S_n'][i]/bat_capacity[j]
+                self.profiles[profile_name][hour] = - agt_results['S_n'][i] / self.agents_df['BASE_KW'][i]
+                j = j + 1
+        self.exportProfiles()
+
 
     @staticmethod
     def consumerProducerInfo(data: pd.DataFrame, **kwargs):
@@ -120,26 +153,25 @@ class DataAquisition:
         exp_cost = 0.0
         return a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost
 
-    def costInfo(self):
+    def costInfo(self, hour):
         costs_data = []
         fn_dict = {
             'CONSUMER': (self.consumerProducerInfo, self.data['LoadsList_Cost']),
             'PRODUCER': (self.consumerProducerInfo, self.data['PvList_Cost']),
-            'BATTERY': self.batteryInfo(self.data['BatteryList_Cost'], hour=0),
-            'EXT_CONSUMER': self.extConsumerInfo(self.data['00_Market_price_hourly_brasil'], hour=0),
-            'EXT_PRODUCER': self.extProducerInfo(self.data['00_Market_price_hourly_brasil'], hour=0),
+            'BATTERY': self.batteryInfo(self.data['BatteryList_Cost'], hour=hour),
+            'EXT_CONSUMER': self.extConsumerInfo(self.data['00_Market_price_hourly_brasil'], hour=hour),
+            'EXT_PRODUCER': self.extProducerInfo(self.data['00_Market_price_hourly_brasil'], hour=hour),
         }
         for i, row in self.agents_df.iterrows():
-            if type(fn_dict[row['TYPE']]) is tuple and len(fn_dict[row['TYPE']]) == 2:
-
-                fn, data = fn_dict[row['TYPE']]
-                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn(data, name=row['NAME'])
+            if type(fn_dict[row['type']]) is tuple and len(fn_dict[row['type']]) == 2:
+                fn, data = fn_dict[row['type']]
+                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn(data, name=row['name'])
             else:
-                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn_dict[row['TYPE']]
-            costs_data.append({'AGENT': i, 'NAME': row['NAME'], 'TYPE': row['TYPE'], 'A_[R$/KW^2]': a_doll_kw2,
+                a_doll_kw2, b_doll_kw, cost_s, inner_cost, imp_cost, exp_cost = fn_dict[row['type']]
+            costs_data.append({'AGENT': i, 'NAME': row['name'], 'TYPE': row['type'], 'A_[R$/KW^2]': a_doll_kw2,
                   'B_[R$/KW]': b_doll_kw, 'COST_S': cost_s, 'INNER_COST': inner_cost, 'IMP_COST': imp_cost, 'EXP_COST': exp_cost})
-
         self.cost_df = pd.DataFrame(costs_data, index=None)
+        return self.cost_df
 class PreProcessingData(DataAquisition):
     def __init__(self, args):
         super(PreProcessingData, self).__init__(args=args, path=args.path)
@@ -147,9 +179,8 @@ class PreProcessingData(DataAquisition):
         self.createParams()
         self.createDefaultDf()
         self.createProfiles()
-        self.costInfo()
 
-        community_buses = list(self.agents_df.head(self.args.n_agents - 2)['BUS'].unique())
+        community_buses = list(self.agents_df.head(self.args.n_agents - 2)['bus'].unique())
         community_lines = []
         for bus in community_buses:
             if bus in self.data['LinesListLV']['BUS_FROM'].values:

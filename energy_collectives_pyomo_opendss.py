@@ -26,7 +26,7 @@ import sys
 
 # CASE STUDY
 case = 6            # options = [1,2,3,4,5,6,7]
-battery_size = 0    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
+battery_size = 1    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
 
 # ...::: IMPORTING DATA :::...
 # HIGH VOLTAGE BUSES DATA
