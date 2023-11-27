@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import pandapower as pp
 import matplotlib.pyplot as plt
-# import py_dss_interface as pydss
+import py_dss_interface as pydss
 from pyomo.environ import *
 from pandapower.plotting import simple_plot, simple_plotly
 
@@ -25,8 +25,8 @@ import sys
 # sys.exit()
 
 # CASE STUDY
-case = 6            # options = [1,2,3,4,5,6,7]
-battery_size = 1    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
+case = 1            # options = [1,2,3,4,5,6,7]
+battery_size = 0    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
 
 # ...::: IMPORTING DATA :::...
 # HIGH VOLTAGE BUSES DATA
@@ -524,7 +524,7 @@ def profile_curves():
     return profiles_dict
 
 # XXX - FUNCTION TO UPDATE LOADSHAPES WITH OPTIMIZATION RESULTS
-def profile_curves_update(hour,agt_results):
+def     profile_curves_update(hour,agt_results):
     j=0
     for i in range(0,n_agents):
         profile_name = agents_df['PROFILE'][i]
@@ -1333,8 +1333,8 @@ for day in range(0,n_days):
 
 
 ### Saving Results Dictionaries
-# np.save(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_optimization_results.npy', optimization_results)
-# np.save(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_agents_results.npy', agents_results)
-# np.save(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_communities_results.npy', communities_results)
-# np.save(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_bus_results.npy', community_bus_results)
-# np.save(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_lines_results.npy', community_lines_results)
+np.save(f'results/dict_optimization_results.npy', optimization_results)
+np.save(r'results/dict_agents_results.npy', agents_results)
+np.save(r'results/dict_communities_results.npy', communities_results)
+np.save(r'results/dict_community_bus_results.npy', community_bus_results)
+np.save(r'results/dict_community_lines_results.npy', community_lines_results)

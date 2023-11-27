@@ -16,8 +16,8 @@ import sys
 
 
 # CASE STUDY
-case = 6            # options = [1,2,3,4,5,6,7]
-battery_size = 10    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
+case = 1            # options = [1,2,3,4,5,6,7]
+battery_size = 0    # options = [0,1,3,5,10]  -> 0 = no battery // 1 = base battery // 10 = 10x base battery
 
 # ...::: IMPORTING DATA :::...
 # HIGH VOLTAGE BUSES DATA
@@ -575,18 +575,18 @@ def data_processing(agents_df):
             state_of_charge = pd.DataFrame(100 * battery_daily_results['Soc'])
             if len(bat_dispatch) == 0:
                 bat_dispatch = battery_kw
-                bat_dispatch = bat_dispatch.rename(columns={'S': name})
+                # bat_dispatch = bat_dispatch.rename(columns={'S': name})
                 bat_soc = state_of_charge
                 bat_soc = bat_soc.rename(columns={'Soc': name})
             else:
                 bat_dispatch = pd.concat([bat_dispatch, battery_kw], axis=1)
-                bat_dispatch = bat_dispatch.rename(columns={'S': name})
+                # bat_dispatch = bat_dispatch.rename(columns={'S': name})
                 bat_soc = pd.concat([bat_soc, state_of_charge], axis=1)
                 bat_soc = bat_soc.rename(columns={'Soc': name})
         if type == 'CONSUMER':
             agent_daily_results = pd.DataFrame(agents_results[agent][day].values())
             agent_kw = 1000 * agent_daily_results['P']
-            agent_kw = agent_kw.rename({'0': name}, axis='columns')
+            # agent_kw = agent_kw.rename({'0': name}, axis='columns')
             if len(load_dispatch) == 0:
                 load_dispatch = agent_kw
                 load_dispatch = load_dispatch.rename(name)
@@ -695,11 +695,11 @@ num_community_buses = len(community_buses)
 num_community_lines =  len(community_lines)
 # **************************************************************************
 # LOADING RESULTS DICTIONARIES
-# optimization_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_optimization_results.npy',allow_pickle='TRUE').item()
-# agents_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_agents_results.npy',allow_pickle='TRUE').item()
-# communities_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_communities_results.npy',allow_pickle='TRUE').item()
-# community_bus_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_bus_results.npy',allow_pickle='TRUE').item()
-# community_lines_results = np.load(r'C:\Users\ppeters\Documents\Mestrado\OpenDSS_CostaRica_data\dict_community_lines_results.npy',allow_pickle='TRUE').item()
+optimization_results = np.load(r'results/dict_optimization_results.npy',allow_pickle='TRUE').item()
+agents_results = np.load(r'results/dict_agents_results.npy',allow_pickle='TRUE').item()
+communities_results = np.load(r'results/dict_communities_results.npy',allow_pickle='TRUE').item()
+community_bus_results = np.load(r'results/dict_community_bus_results.npy',allow_pickle='TRUE').item()
+community_lines_results = np.load(r'results/dict_community_lines_results.npy',allow_pickle='TRUE').item()
 
 for day in range(0, n_days):
     ### PLOTTING NETWORK IN PANDAPOWER
