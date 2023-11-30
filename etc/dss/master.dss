@@ -1,0 +1,20 @@
+clear
+set defaultbasefrequency=60
+new circuit.SJU BasekV=138 pu=1.0 angle=0 frequency=60 phases=3 Isc3=10000.0 Isc1=10500.0
+redirect Bibliotecas/bibliotecas.dss
+redirect FLX_LinesMV.dss
+redirect FLX_Substation.dss
+redirect FLX_Transformers.dss
+redirect FLX_Monitors.dss
+redirect FLX_LinesLV.dss
+redirect FLX_Loadshapes_Nom_hourly_edited.dss
+redirect FLX_LoadsLV_Caso06.dss
+redirect FLX_DG_Caso06.dss
+!Case Study 06
+redirect FLX_Storage_Caso06.dss
+!Bus coordinates
+buscoords FLX_BusListMV.csv
+buscoords FLX_BusListLV.csv
+set mode=daily
+set stepsize=1
+set number=1

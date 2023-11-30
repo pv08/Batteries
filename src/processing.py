@@ -1,15 +1,16 @@
 import pandas as pd
 import glob
 from tqdm import tqdm
+from src.utils.functions import find_file_extention
 class DataAquisition:
     def __init__(self, args, path):
         self.args = args
         self.path = path
         self.data = {}
     def findData(self):
-        files = glob.glob(f'{self.path}/dss_data/*.csv')
+        files = find_file_extention(path=f'{self.path}/dss_data/', type='.csv')
         for file in tqdm(files, total=len(files)):
-            name = file.split('\\')[-1].replace('.csv', '')
+            name = file.split('//')[-1].replace('.csv', '')
             param = pd.read_csv(file, delimiter=',')
             self.data[name] = param
 
@@ -181,9 +182,9 @@ class PreProcessingData(DataAquisition):
         self.createDefaultDf()
         self.createProfiles()
 
-        community_buses = list(self.agents_df.head(self.args.n_agents - 2)['bus'].unique())
+        self.community_buses = list(self.agents_df.head(self.args.n_agents - 2)['bus'].unique())
         community_lines = []
-        for bus in community_buses:
+        for bus in self.community_buses:
             if bus in self.data['LinesListLV']['BUS_FROM'].values:
                 idx = list(self.data['LinesListLV']['BUS_FROM'].values).index(bus)
                 community_lines.append(self.data['LinesListLV']['NAME'].values[idx])
@@ -191,6 +192,6 @@ class PreProcessingData(DataAquisition):
             if bus in self.data['LinesListLV']['BUS_TO'].values:
                 idx = list(self.data['LinesListLV']['BUS_TO'].values).index(bus)
                 community_lines.append(self.data['LinesListLV']['NAME'].values[idx])
-        community_lines = list(dict.fromkeys(community_lines))
+        self.community_lines = list(dict.fromkeys(community_lines))
         print(community_lines)
 

@@ -2,6 +2,8 @@ from pyomo.environ import *
 from src.processing import PreProcessingData
 from src.report import Report
 from src.utils.functions import *
+from src.dss_config import DSSConfig
+from src.powerflow import Powerflow
 
 class Optmizer(PreProcessingData):
     def __init__(self, args, day, hour, optimization_results, agents_results, communities_results):
@@ -312,16 +314,20 @@ class Optmizer(PreProcessingData):
         return self.model, self.results, self.inner_community_balance, self.outer_community_balance
 
 
-class OptimizationData(PreProcessingData):
+class OptimizationData:
     def __init__(self, args):
-        super(OptimizationData, self).__init__(args=args)
+        self.args = args
+        self.dssConfig = DSSConfig(root_dir=args.root_dir, battery_size=args.battery_size, study_case=args.case, profiles=args.profiles)
+
         self.opt_logger = [{hour: {} for hour in range(self.args.hour)}for day in range(self.args.day)]
         #(day, hour[hour])
         self.optimization_results = [{hour: {} for hour in range(self.args.hour)}for day in range(self.args.day)]  ## RESULTS DICTIONARY - MUST BE DECLARED BEFORE OPTIMIZATION LOOP
         # (agent, day ,hour[hour])
-        self.agents_results = [[{hour: {} for hour in range(self.args.hour)} for day in range(self.args.day)] for agent in range(self.args.n_agents)]
-        # (comm, day ,hour[hour])
-        self.communities_results = [[{hour: {} for hour in range(self.args.hour)} for day in range(self.args.day)] for com in range(self.args.n_communities)] ## RESULTS DICTIONARY - MUST BE DECLARED BEFORE OPTIMIZATION LOOP
+        # day: list, bus: list, hour: dict
+        self.community_bus_results = []
+        # day: list, line: list, hour: dict
+        self.community_lines_results = []
+
 
     def updateResults(self, agents_results, communities_results, optimization_results):
         self.agents_results = agents_results
@@ -329,9 +335,14 @@ class OptimizationData(PreProcessingData):
         self.optimization_results = optimization_results
 
     def studyCase(self):
+        preprocess = PreProcessingData(args=self.args)
+        self.agents_results = [[{hour: {} for hour in range(self.args.hour)} for day in range(self.args.day)] for agent in range(self.args.n_agents)]
+        # (comm, day ,hour[hour])
+        self.communities_results = [[{hour: {} for hour in range(self.args.hour)} for day in range(self.args.day)] for com in range(self.args.n_communities)] ## RESULTS DICTIONARY - MUST BE DECLARED BEFORE OPTIMIZATION LOOP
         for day in range(self.args.day):
             for hour in range(self.args.hour):
-                self.cost_df = self.costInfo(hour=hour)
+                preprocess = PreProcessingData(args=self.args)
+                self.cost_df = preprocess.costInfo(hour=hour)
                 opt = Optmizer(args=self.args,
                                day=day,
                                hour=hour,
@@ -341,7 +352,7 @@ class OptimizationData(PreProcessingData):
                 self.opt_logger[day][hour] = {'fob': value(self.model.obj), 'solver_status': self.results.solver.status,
                                              'condition': self.results.solver.termination_condition,
                                              'opt_model': self.model, 'results': self.results}
-                report = Report(n_communities=self.args.n_communities, agents_df=self.agents_df, day=day, hour=hour,
+                report = Report(n_communities=self.args.n_communities, agents_df=preprocess.agents_df, day=day, hour=hour,
                                 battery_size=self.args.battery_size, n_agents=self.args.n_agents,
                                 agents_results=opt.agents_results, communities_results=opt.communities_results,
                                 optimization_results=opt.optimization_results)
@@ -350,5 +361,20 @@ class OptimizationData(PreProcessingData):
                                   outer_community_balance=self.outer_community_balance)
                 self.updateResults(agents_results=report.agents_results, communities_results=report.communities_results,
                                    optimization_results=report.optimization_results)
-                self.updateProfiles(hour=hour, agt_results=report.agt_results)
+                preprocess.updateProfiles(hour=hour, agt_results=report.agt_results)
 
+                powerflow = Powerflow(battery_size=self.args.battery_size,
+                                      case=self.args.case,
+                                      hour=hour,
+                                      day=day,
+                                      bat_list=preprocess.data[f'BatteryList_Caso0{self.args.case}']['NAME'],
+                                      lv_bus_list=preprocess.data['BusListLV']['NAME'],
+                                      lvbus_basekv_list=preprocess.data['BusListLV']['BASE_KV'])
+                bus_results, line_results = powerflow.calcDSSPowerflow(master_file=self.dssConfig.masterfile,
+                                           community_buses=preprocess.community_buses,
+                                           community_lines=preprocess.community_lines)
+
+                self.community_bus_results.append(bus_results)
+                self.community_lines_results.append(line_results)
+                os.chdir(self.args.root_dir)
+                del powerflow, opt, preprocess
