@@ -8,10 +8,9 @@ redirect FLX_Transformers.dss
 redirect FLX_Monitors.dss
 redirect FLX_LinesLV.dss
 redirect FLX_Loadshapes_Nom_hourly_edited.dss
-redirect FLX_LoadsLV_Caso06.dss
-redirect FLX_DG_Caso06.dss
-!Case Study 06
-redirect FLX_Storage_Caso06.dss
+redirect FLX_LoadsLV_Caso04.dss
+redirect FLX_DG_Caso04.dss
+!Case Study 04
 !Bus coordinates
 buscoords FLX_BusListMV.csv
 buscoords FLX_BusListLV.csv

@@ -3,9 +3,12 @@ import glob
 from tqdm import tqdm
 from src.utils.functions import find_file_extention
 class DataAquisition:
-    def __init__(self, args, path):
+    def __init__(self, args, path, battery_size: int=1, battery_allocation: bool=False, bat_loc: list = None):
         self.args = args
         self.path = path
+        self.battery_size = battery_size
+        self.battery_allocation = battery_allocation
+        self.bat_loc = bat_loc
         self.data = {}
     def findData(self):
         files = find_file_extention(path=f'{self.path}/dss_data/', type='.csv')
@@ -17,19 +20,44 @@ class DataAquisition:
     def createParams(self):
         self.len_load = self.data[f"LoadsList_Caso0{self.args.case}"].shape[0]
         self.len_gen = self.data[f"PvList_Caso0{self.args.case}"].shape[0]
-        self.len_bat = self.data[f"BatteryList_Caso0{self.args.case}"].shape[0]
+
         self.load_community = max(self.data[f"LoadsList_Caso0{self.args.case}"]['COMMUNITY'])
         self.gen_community = max(self.data[f"PvList_Caso0{self.args.case}"]['COMMUNITY'])
 
-        if self.args.battery_size != 0:
-            self.args.n_agents = self.len_load + self.len_gen + self.len_bat + 2
+        if self.battery_allocation and self.bat_loc is not None:
+            self.battery_df = self.createBatDf(bat_loc=self.bat_loc, battery_size=self.battery_size)
+            self.len_bat = self.battery_df.shape[0]
+            # self.len_bat = self.data[f"BatteryList_Caso0{self.args.case}"].shape[0]
+            self.n_agents = self.len_load + self.len_gen + self.len_bat + 2
         else:
-            self.args.n_agents = self.len_load + self.len_gen + 2
+            self.n_agents = self.len_load + self.len_gen + 2
 
-        self.args.n_communities = max(self.load_community, self.gen_community) + 1
+        self.n_communities = max(self.load_community, self.gen_community) + 1
+
+    @staticmethod
+    def createBatDf(bat_loc: list, battery_size):
+        values = []
+        for bat in bat_loc:
+            values.append({
+                'NAME': bat['name'],
+                'BUS': bat['bus'],
+                'COMMUNITY': 1,
+                'BASE_KW': battery_size * 2.56,
+                'NOMINAL_CAPACITY_[KWH]': 1.240,
+                'SOC_MAX': .8,
+                'SOC_MIN': .2,
+                'SOC_INIT': .5,
+                'CHARGE_EFF': .96,
+                'DISCHARGE_EFF': .96,
+                'CHARGE_RATE': .25,
+                'DISCHARGE_RATE': .9375,
+                'AUTODISCHARGE_RATE': 1.72171E-05,
+                'LOADSHAPE': 'BatteryProfile'
+            })
+        return pd.DataFrame(values)
 
     def createDefaultDf(self):
-        agent_number = list(range(self.args.n_agents))
+        agent_number = list(range(self.n_agents))
         agent_name = list(self.data[f"LoadsList_Caso0{self.args.case}"]['NAME']) + list(self.data[f"PvList_Caso0{self.args.case}"]['NAME'])
         agent_type = (['CONSUMER'] * self.len_load) + (['PRODUCER'] * self.len_gen)
         agent_bus = list(self.data[f"LoadsList_Caso0{self.args.case}"]['BUS']) + list(self.data[f"PvList_Caso0{self.args.case}"]['BUS'])
@@ -40,20 +68,20 @@ class DataAquisition:
         agent_profile = list(self.data[f"LoadsList_Caso0{self.args.case}"]['LOADSHAPE']) + list(
             self.data[f"PvList_Caso0{self.args.case}"]['GEN_SHAPE'])
 
-        if self.args.battery_size != 0:
-            agent_name += list(self.data[f"BatteryList_Caso0{self.args.case}"]['NAME'])
+        if self.battery_allocation and self.bat_loc is not None:
+            agent_name += list(self.battery_df['NAME'])
             agent_type += ['BATTERY'] * self.len_bat
-            agent_bus += list(self.data[f"BatteryList_Caso0{self.args.case}"]['BUS'])
-            agent_basekw += list(self.data[f"BatteryList_Caso0{self.args.case}"]['BASE_KW'])
-            community_location += list(self.data[f"BatteryList_Caso0{self.args.case}"]['COMMUNITY'])
-            agent_profile += list(self.data[f"BatteryList_Caso0{self.args.case}"]['LOADSHAPE'])
+            agent_bus += list(self.battery_df['BUS'])
+            agent_basekw += list(self.battery_df['BASE_KW'])
+            community_location += list(self.battery_df['COMMUNITY'])
+            agent_profile += list(self.battery_df['LOADSHAPE'])
 
         agent_name += ['EXTERNAL_GRID'] * 2
         agent_type.append('EXT_CONSUMER')
         agent_type.append('EXT_PRODUCER')
         agent_bus += ['SOURCEBUS'] * 2
         agent_basekw += [999999] * 2
-        community_location += [self.args.n_communities] * 2
+        community_location += [self.n_communities] * 2
         agent_profile += [''] * 2
         self.agents_data = [
             {'agent_id': id, 'name': name, 'type': type, 'bus': bus, 'kw_base': base, 'community_location': location, 'profile': profile}
@@ -93,7 +121,7 @@ class DataAquisition:
 
     def updateProfiles(self, hour, agt_results):
         j = 0
-        for i in range(0, self.args.n_agents):
+        for i in range(0, self.n_agents):
             profile_name = self.agents_df['profile'][i]
             if profile_name != '':
                 self.profiles[profile_name][hour] = abs(agt_results['P_n'][i]) / self.agents_df['kw_base'][i]
@@ -175,14 +203,14 @@ class DataAquisition:
         self.cost_df = pd.DataFrame(costs_data, index=None)
         return self.cost_df
 class PreProcessingData(DataAquisition):
-    def __init__(self, args):
-        super(PreProcessingData, self).__init__(args=args, path=args.path)
+    def __init__(self, args, battery_allocation: bool=False, bat_loc: list = None):
+        super(PreProcessingData, self).__init__(args=args, path=args.path, battery_allocation=battery_allocation, bat_loc=bat_loc)
         self.findData()
         self.createParams()
         self.createDefaultDf()
         self.createProfiles()
 
-        self.community_buses = list(self.agents_df.head(self.args.n_agents - 2)['bus'].unique())
+        self.community_buses = list(self.agents_df.head(self.n_agents - 2)['bus'].unique())
         community_lines = []
         for bus in self.community_buses:
             if bus in self.data['LinesListLV']['BUS_FROM'].values:
@@ -193,5 +221,4 @@ class PreProcessingData(DataAquisition):
                 idx = list(self.data['LinesListLV']['BUS_TO'].values).index(bus)
                 community_lines.append(self.data['LinesListLV']['NAME'].values[idx])
         self.community_lines = list(dict.fromkeys(community_lines))
-        print(community_lines)
 

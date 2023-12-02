@@ -4,12 +4,14 @@ from src.utils.functions import mkdir_if_not_exists
 from pathlib import Path
 
 class DSSConfig:
-    def __init__(self, root_dir, battery_size, study_case, profiles):
+    def __init__(self, root_dir, battery_allocation ,battery_size, study_case, profiles, bat_bus_location: list = None):
 
         mkdir_if_not_exists('etc/')
         mkdir_if_not_exists('etc/dss/')
         self.root_dir = root_dir
+        self.bat_bus_location = bat_bus_location
         self.battery_size = battery_size
+        self.battery_allocation = battery_allocation
         self.study_case = study_case
         #sets
         self.defaultbasefrequency = 60
@@ -71,7 +73,15 @@ class DSSConfig:
 
 
 
+    @staticmethod
+    def createStorageFile(case: int, bus_location: list, battery_size: int = 1):
+        file = ''
+        for bat_bus in bus_location:
+            file += f"New Storage.{bat_bus['name']} phases=1 Bus1={bat_bus['bus']}.1.2.3 kv=0.24 kwrated={2.56 * battery_size} kwhrated={10.24 * battery_size} dispmode=follow daily=BatteryProfile\n"
 
+        with open(f'etc/dss/FLX_Storage_Caso0{case}.dss', 'w') as dss_file:
+            dss_file.write(file)
+            dss_file.close()
 
 
     def createMasterDSSFiles(self):
@@ -86,7 +96,8 @@ class DSSConfig:
             file += f'redirect {redirect}\n'
 
         file += f'!Case Study 0{self.study_case}\n'
-        if self.battery_size != 0:
+        if self.battery_allocation and self.bat_bus_location is not None:
+            self.createStorageFile(case=self.study_case, bus_location=self.bat_bus_location, battery_size=self.battery_size)
             file += f'redirect FLX_Storage_Caso0{self.study_case}.dss\n'
 
         file += f'!Bus coordinates\n'

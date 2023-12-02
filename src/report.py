@@ -3,14 +3,14 @@ import pandas as pd
 from pyomo.environ import *
 from pandas import DataFrame
 class Report:
-    def __init__(self, n_communities, agents_df, day, hour, battery_size, n_agents,
+    def __init__(self, n_communities, agents_df, day, hour, battery_allocation, n_agents,
                  agents_results, communities_results, optimization_results):
         self.n_communities = n_communities
         self.communities_results = communities_results
         self.optimization_results = optimization_results
         self.agents_results = agents_results
         self.n_agents = n_agents
-        self.battery_size = battery_size
+        self.battery_allocation = battery_allocation
         self.day = day
         self.hour = hour
         self.agents_df = agents_df
@@ -45,7 +45,7 @@ class Report:
             ## separates the total community trade results in a list
             total_Qexp = [sum(Qexp[i][:]) for i in range(0, self.n_communities)]
             total_Qimp = [sum(Qimp[i][:]) for i in range(0, self.n_communities)]
-            if self.battery_size == 0:
+            if not self.battery_allocation:
                 for agent in range(0, self.n_agents):  ## saves agent optimization results in dictionary
                     self.agents_results[agent][self.day][self.hour] = {
                         'P': model.P_n[agent].value,
@@ -53,7 +53,7 @@ class Report:
                         'Alpha': model.Alpha_n[agent].value,
                         'Beta': model.Beta_n[agent].value
                     }
-            if self.battery_size != 0:
+            if self.battery_allocation:
                 for agent in range(0, self.n_agents):  ## saves agent optimization results in dictionary
                     self.agents_results[agent][self.day][self.hour] = {
                         'P': model.P_n[agent].value,
@@ -105,7 +105,7 @@ class Report:
 
         Agent, P_n, Q_n, Alpha_n, Beta_n, S_n, Soc_n = ([] for i in range(7))
 
-        if self.battery_size == 0:
+        if not self.battery_allocation:
             for agent in range(0, self.n_agents):
                 Agent.append(agent)
                 P_n.append(self.agents_results[agent][self.day][self.hour]['P'])
@@ -115,7 +115,7 @@ class Report:
 
             self.agt_results = pd.DataFrame(list(zip(Agent, P_n, Q_n, Alpha_n, Beta_n)),
                                        columns=['Agent', 'P_n', 'Q_n', 'Alpha_n', 'Beta_n'])
-        if self.battery_size != 0:
+        if self.battery_allocation:
             for agent in range(0, self.n_agents):
                 Agent.append(agent)
                 P_n.append(self.agents_results[agent][self.day][self.hour]['P'])

@@ -1,0 +1,2 @@
+!UNIT
+new transformer.HVMV  buses=[Sourcebus.1.2.3 BUSMVFLX1.1.2.3 BUSMV_TerSub.1.2.3]  phases=3  windings=3  conns=[wye wye delta] kVs=[138 34.5 13.8]  kVAs=[30000.0 30000.0 30000.0]  xhl=10 xht=17 xlt=4  %loadloss=0 %noloadloss=0  wdg=1 numtaps=33 tap=1 maxtap=1.05 mintap=0.85 normhkva=30000

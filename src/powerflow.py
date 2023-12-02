@@ -1,8 +1,9 @@
 import numpy as np
 from py_dss_interface import DSSDLL
 class Powerflow():
-    def __init__(self, battery_size, case, hour, day, bat_list, lv_bus_list, lvbus_basekv_list):
+    def __init__(self, battery_size, battery_allocation, case, hour, day, lv_bus_list: list, lvbus_basekv_list: list, bat_list: list = None):
         self.dss = DSSDLL()
+        self.battery_allocation = battery_allocation
         self.battery_size = battery_size
         self.case = case
         self.hour = hour
@@ -15,19 +16,18 @@ class Powerflow():
         self.dss.text(f"compile {master_file}")
 
         if self.day == 0 and self.hour == 0:
-            for battery in self.bat_list:
-                name = "Storage.%s" % battery
-                self.dss.circuit_set_active_element(name)
-                # dss.cktelement_all_property_names()
-                # property_index = str(dss.cktelement_all_property_names().index("%stored") + 1)
-                # dss.dssproperties_read_value(str(dss.cktelement_all_property_names().index("%stored") + 1))
-                self.dss.text(f"edit {name} %stored=50")
+            if self.battery_allocation and self.bat_list is not None:
+                for battery in self.bat_list:
+                    name = "Storage.%s" % battery
+                    self.dss.circuit_set_active_element(name)
+                    # dss.cktelement_all_property_names()
+                    # property_index = str(dss.cktelement_all_property_names().index("%stored") + 1)
+                    # dss.dssproperties_read_value(str(dss.cktelement_all_property_names().index("%stored") + 1))
+                    self.dss.text(f"edit {name} %stored=50")
 
         self.dss.solution_write_hour(self.hour)
-        if self.battery_size == 0:
-            self.dss.text("set casename=case0%s_day%shour%s_no_storage" % (self.case, self.day, self.hour))
-        if self.battery_size != 0:
-            self.dss.text("set casename=case0%s_day%shour%s_with_storage%s" % (self.case, self.day, self.hour, self.battery_size))
+        case_str = f"set casename=case0{self.case}_day{self.day}_hour{self.hour}_no_storage" if not self.battery_allocation else f"set casename=case0{self.case}_day{self.day}_hour{self.hour}_with_storage{self.battery_size}(10.24kWh)"
+        self.dss.text(case_str)
 
         # ...::: SETTINGS FOR VOLTAGE AND OVERLOAD VIOLATIONS REPORTS - OBS => needs CloseDI after SOLVE:::...
         # dss.text("set DemandInterval=true")
@@ -52,7 +52,7 @@ class Powerflow():
             if self.dss.bus_num_nodes() == 1:
                 vmag = self.dss.bus_vmag_angle()
                 community_bus_results.append(
-                    {'Vmag': vmag}
+                    {'bus': bus, 'Vmag': vmag, 'violation': None}
                 )
             if self.dss.bus_num_nodes() == 2:
                 vmag = self.dss.bus_vmag_angle()
@@ -60,11 +60,14 @@ class Powerflow():
                 vmag_max = max(vmag[0], vmag[2])
                 if vmag_min < 0.95 * self.lvbus_basekv_list[idx[0][0]] * 1000:
                     community_bus_results.append({
-                        'Vmag': vmag_min
+                        'bus': bus,
+                        'Vmag': vmag_min,
+                        'violation': True
                     })
                 else:
                     community_bus_results.append({
-                        'Vmag': vmag_max
+                        'bus': bus,
+                        'Vmag': vmag_max, 'violation': None
                     })
             if self.dss.bus_num_nodes() == 3:
                 vmag = self.dss.bus_vmag_angle()
@@ -72,11 +75,13 @@ class Powerflow():
                 vmag_max = max(vmag[0], vmag[2], vmag[4])
                 if vmag_min < 0.95 * self.lvbus_basekv_list[idx[0][0]] * 1000:
                     community_bus_results.append({
-                        'Vmag': vmag_min
+                        'bus': bus,
+                        'Vmag': vmag_min, 'violation': True
                     })
                 else:
                     community_bus_results.append({
-                        'Vmag': ('%s_3PH' % vmag_max)
+                        'bus': bus,
+                        'Vmag': ('%s_3PH' % vmag_max), 'violation': None
                     })
 
         community_lines_results = []
@@ -95,6 +100,7 @@ class Powerflow():
                                   current_mag[4], current_mag[6],
                                   current_mag[8], current_mag[10])
             community_lines_results.append({
+                'line': line,
                 'Imag': current_mag,
                 'Imag_pu': current_mag / current_base
             })

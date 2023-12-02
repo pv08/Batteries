@@ -1,0 +1,10 @@
+New PVSystem.PV1FFLX1 bus1=BUSLVFLX495.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV3FFLX2 bus1=BUSLVFLX1141.1.2.3 kV=0.24 phases=3 kVA=1 PF=1 conn=wye irrad=0.90 Pmpp=1 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX3 bus1=BUSLVFLX180.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX4 bus1=BUSLVFLX1195.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX5 bus1=BUSLVFLX269.1.2 kV=0.24 phases=1 kVA=1 PF=1 conn=wye irrad=0.90 Pmpp=1 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX6 bus1=BUSLVFLX795.1.2 kV=0.24 phases=1 kVA=1 PF=1 conn=wye irrad=0.90 Pmpp=1 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV3FFLX7 bus1=BUSLVFLX1122.1.2.3 kV=0.24 phases=3 kVA=1 PF=1 conn=wye irrad=0.90 Pmpp=1 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX8 bus1=BUSLVFLX1026.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX9 bus1=BUSLVFLX820.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
+New PVSystem.PV1FFLX10 bus1=BUSLVFLX997.1.2 kV=0.24 phases=1 kVA=3 PF=1 conn=wye irrad=0.90 Pmpp=3 temperature=25 effcurve=Myeff P-TCurve=MyPvsT Daily=PVprofile TDaily=PVtemp %cutin=0.01 %cutout=0.01 enabled=yes 
